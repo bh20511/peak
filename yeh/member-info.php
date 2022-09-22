@@ -46,7 +46,7 @@ if (empty($r)) {
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">輸入新密碼 (6 位數以上，並且至少包含 大寫字母、小寫字母、數字、符號 各一)</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" >
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                             <input type="checkbox" name="showpass" id="showpass" onclick="showPw()">
                             <label for="showpass">顯示密碼</label>
                         </div>
@@ -82,7 +82,28 @@ if (empty($r)) {
 
 <?php require __DIR__ . '/parts/scripts.php'; ?>
 <script>
-        function Preview() {
+    function checkForm() {
+        const fd = new FormData(document.form1);
+        fetch('member-edit-api-m.php', {
+            method: 'POST',
+            body: fd
+        }).then(r => r.json()).then(obj => {
+            console.log(obj);
+            if (!obj.success) {
+                alert(obj.error);
+            } else {
+                alert('資料修改成功');
+                console.log(obj.postData.password);
+                if(obj.postData.password){
+                location.href = "logout-api-m.php";
+                } else {
+                location.reload();
+                }
+            }
+        })
+    }
+
+    function Preview() {
         const preview = document.querySelector("#preview2");
         const getImg = document.querySelector("#formFile");
 
@@ -93,5 +114,14 @@ if (empty($r)) {
     }
 
     Preview();
+
+    function showPw() {
+        let pass = document.getElementById("exampleInputPassword1");
+        if (pass.type === "password") {
+            pass.type = "text";
+        } else {
+            pass.type = "password";
+        }
+    }
 </script>
 <?php require __DIR__ . '/parts/html-foot.php'; ?>
