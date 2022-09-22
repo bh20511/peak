@@ -1,10 +1,10 @@
 <?php
 
-$db_host = 'localhost';
+$db_host = '192.168.35.7';
 $db_name = 'hiking';
 //變換資料庫時要修改user和pass
-$db_user = 'root';
-$db_pass = 'root';
+$db_user = 'mountains';
+$db_pass = '1214';
 
 //data source nama
 $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8";
