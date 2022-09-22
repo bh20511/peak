@@ -1,4 +1,4 @@
-<?php require '../yeh/parts/admin-req.php';?>
+<?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php';
 $pageName = 'list';
 
@@ -26,7 +26,7 @@ if ($totalRows) {
     $sql = sprintf(
         "SELECT * FROM rental  
         JOIN product_category 
-        ON rental.product_category_sid=product_category.sid 
+        ON rental.product_category_sid=product_category.product_category_sid 
         JOIN brand
         ON brand.brand_sid= rental.brand_sid
         ORDER BY rental_product_sid 
@@ -106,7 +106,7 @@ $output = [
                     <?php foreach ($rows as $r) : ?>
                         <tr>
                             <td>
-                                <a href="javascript: delete_it(<?= $r['rental_product_sid'] ?> ,'<?=$r['rental_product_name']  ?>' )">
+                                <a href="javascript: delete_it(<?= $r['rental_product_sid'] ?> ,'<?= $r['rental_product_name']  ?>' )">
                                     <i class="fa-solid fa-trash-can"></i>
                                 </a>
                             </td>
@@ -137,7 +137,7 @@ $output = [
 <script>
     const table = document.querySelector('table');
 
-    function delete_it(a,b) {
+    function delete_it(a, b) {
         if (confirm(`確定要刪除編號為 ${b} 的資料嗎?`)) {
             location.href = `2delete_rental.php?rental_product_sid=${a}`;
         }
