@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ . '/parts/connect_db2.php';
+require '../yeh//parts/connect-db.php';
 
 $store_sid = isset($_GET['store_sid'])? intval($_GET['store_sid']):0;
 

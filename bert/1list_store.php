@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db2.php';
+<?php require '../yeh/parts/connect-db.php';
 $pageName = 'list';
 
 $perPage = 20; // 一頁有幾筆
@@ -41,8 +41,8 @@ $output = [
 // echo json_encode($output); exit;
 
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar.php'; ?>
+<?php require '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -121,7 +121,7 @@ $output = [
     </div>
 
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     const table = document.querySelector('table');
 
@@ -131,4 +131,4 @@ $output = [
         }
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>

@@ -1,8 +1,8 @@
-<?php require __DIR__ . '/parts/connect_db2.php';
+<?php require '../yeh/parts/connect-db.php';
 $pageName = 'insert';
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar.php'; ?>
+<?php require '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
@@ -36,7 +36,7 @@ $pageName = 'insert';
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     let imgg = document.querySelector("#imgg");
     let myimg = document.querySelector("#myimg");
@@ -61,4 +61,4 @@ $pageName = 'insert';
 </script>
 
 
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>

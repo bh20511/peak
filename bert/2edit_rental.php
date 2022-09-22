@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db2.php';
+<?php require '../yeh/parts/connect-db.php';
 $pageName = 'edit';
 
 $rental_product_sid = isset($_GET['rental_product_sid']) ? intval($_GET['rental_product_sid']) : 0;
@@ -28,8 +28,8 @@ $sql3 = "SELECT * from brand";
 $rows2 = $pdo->query($sql3)->fetchAll();
 
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar.php'; ?>
+<?php require '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
@@ -90,7 +90,7 @@ $rows2 = $pdo->query($sql3)->fetchAll();
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     let imgg = document.querySelector("#imgg");
     let myimg = document.querySelector("#myimg");
@@ -118,4 +118,4 @@ $rows2 = $pdo->query($sql3)->fetchAll();
 
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>

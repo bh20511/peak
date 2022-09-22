@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/parts/connect_db2.php';
+require '../yeh/parts/connect_db.php';
 
 $stname = ["力誠店","鎧維店","亦儒店","恩齊店","潛之店","柏宏店","柏翰店","宇軒店","家瑋店","冠霖店","雅婷店"];
 

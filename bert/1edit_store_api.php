@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ . '/parts/connect_db2.php';
+require '../yeh/parts/connect-db.php';
 $folder = __DIR__. '/store/';
 
 header('Content-Type: application/json');

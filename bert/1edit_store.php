@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db2.php';
+<?php require '../yeh/parts/connect-db.php';
 $pageName = 'edit';
 
 $store_sid = isset($_GET['store_sid']) ? intval($_GET['store_sid']) : 0;
@@ -17,8 +17,8 @@ if(empty($r)){
 
 
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar.php'; ?>
+<?php require '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
@@ -52,7 +52,7 @@ if(empty($r)){
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     let imgg = document.querySelector("#imgg");
     let myimg = document.querySelector("#myimg");
@@ -80,4 +80,4 @@ if(empty($r)){
 
     }
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>
