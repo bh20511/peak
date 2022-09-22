@@ -8,7 +8,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='members' ? 'active' : ''  ?>" href="members-list.php">會員</a>
+                        <a class="nav-link <?= $pageName=='members' ? 'active' : ''  ?>" href="../yeh/members-list.php">會員</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="list-product.php">商品</a>
@@ -36,7 +36,7 @@
                         <a class="nav-link" ><?= $_SESSION['admin']['account'] ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="logout-api.php">登出</a>
+                            <a class="nav-link" href="../yeh/logout-api.php">登出</a>
                         </li>
                     <?php endif; ?>
                 </ul>

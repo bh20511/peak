@@ -1,4 +1,4 @@
-<?php require __DIR__ . './parts/admin-req.php'; ?>
+<?php require __DIR__ . '/parts/admin-req.php'; ?>
 <?php
 
 session_start(); //啟用session

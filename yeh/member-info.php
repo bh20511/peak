@@ -12,7 +12,7 @@ if (empty($r)) {
     exit;
 }
 
-print_r($r);
+// print_r($r);
 
 ?>
 <?php require __DIR__ . '/parts/html-head.php'; ?>

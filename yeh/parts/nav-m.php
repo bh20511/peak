@@ -26,20 +26,20 @@
                         <a class="nav-link" href="#">訂單</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName=='members' ? 'active' : ''  ?>" href="">資訊修改</a>
+                        <a class="nav-link <?= $pageName=='members' ? 'active' : ''  ?>" href="../yeh/member-info.php">資訊修改</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <?php if (empty($_SESSION['member'])) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= $pageName=='login' ? 'active' : ''  ?>" href="login-form-m.php">登入</a>
+                            <a class="nav-link <?= $pageName=='login' ? 'active' : ''  ?>" href="../yeh/login-form-m.php">登入</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">
                         <a class="nav-link" ><?= $_SESSION['member']['nickname'] ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="logout-api-m.php">登出</a>
+                            <a class="nav-link" href="../yeh/logout-api-m.php">登出</a>
                         </li>
                     <?php endif; ?>
                 </ul>
