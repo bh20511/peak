@@ -5,7 +5,7 @@ $pageName = 'insert';
 
 
 <?php
-$sql1 = "SELECT `sid`,`product_category` FROM `product_category`";
+$sql1 = "SELECT `product_category_sid`,`product_category` FROM `product_category`";
 $rows = $pdo->query($sql1)->fetchAll();
 
 $sql2 = "SELECT * FROM `brand`";
@@ -35,7 +35,7 @@ $rows2 = $pdo->query($sql2)->fetchAll();
                         <label for="sid">商品種類</label>
                         <select name="sid" id="sid">
                            <?php foreach ($rows as $r) : ?>
-                                <option value="<?= $r['sid'] ?>">
+                                <option value="<?= $r['product_category'] ?>">
                                     <?= $r['product_category'] ?>
                                 </option>
                             <?php endforeach; ?>
