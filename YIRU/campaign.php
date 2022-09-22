@@ -12,6 +12,11 @@ $rows = $pdo->query($sql)->fetchAll();
 ?>
 <?php include '../yeh/parts/html-head.php';?>
 <?php include '../yeh/parts/nav-m.php';?>
+<style>
+    .form1{
+        display: none;
+    }
+</style>
 <form class="form1">
     <input type="text" name="sid" id="sid">
     <input type="text" name="qty" id="qty">

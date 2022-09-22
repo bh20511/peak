@@ -18,6 +18,9 @@ $rows = $pdo->query($sql)->fetchAll();
         width: 30%;
         display: inline-block;
     }
+    .form1{
+        display:none;
+    }
 </style>
 <form class="form1">
     <input type="text" name="sid" id="sid">
