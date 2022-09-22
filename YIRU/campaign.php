@@ -63,6 +63,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <?php endforeach ?>
     </div>
 </div>
+<?php include '../yeh/parts/scripts.php';?>
 <script>
     function addToCar(event) {
         let btnE = event.currentTarget;
@@ -96,6 +97,4 @@ $rows = $pdo->query($sql)->fetchAll();
 </script>
 
 
-
-<?php include '../yeh/parts/scripts.php';?>
 <?php include '../yeh/parts/html-foot.php';?>
