@@ -1,6 +1,6 @@
 <?php
-// require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/parts/connect_db.php';
+require '../yeh/parts/admin-req.php';
+require '../yeh/parts/connect-db.php';
 
 $perPage = 15; //固定一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -46,8 +46,8 @@ $output = [
 // echo json_encode($output);
 // exit; // 後面的都不執行
 ?>
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar copy.php'; ?>
+<?php require  '../yeh/parts/html-head.php'; ?>
+<?php include  '../yeh/parts/navbar copy.php'; ?>
 
 <div class="container">
     <div class="row">
@@ -81,8 +81,8 @@ $output = [
 </div>
 
 
-<?php include __DIR__ .'/list-table-admin.php'; ?>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include '../yeh/list-table-admin.php'; ?>
+<?php include '../yeh/parts/scripts.php'; ?>
 
 <script>
     const table = document.querySelector('table');
@@ -98,4 +98,4 @@ $output = [
         location.href = 'insert-form.php'
     })
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>

@@ -1,6 +1,6 @@
 <?php
-// require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/parts/connect_db.php';
+require '../yeh/parts/admin-req.php';
+require '../yeh/parts/connect-db.php';
 $pageName = 'edit';
 
 
@@ -45,8 +45,8 @@ $L_rows = $pdo->query($L_sql)->fetchAll();
 
 ?>
 
-<?php require __DIR__ . '/parts/html-head.php'; ?>
-<?php include __DIR__ . '/parts/navbar copy.php'; ?>
+<?php require  '../yeh/parts/html-head.php'; ?>
+<?php include  '../yeh/parts/nav.php'; ?>
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
@@ -109,7 +109,7 @@ $L_rows = $pdo->query($L_sql)->fetchAll();
         </div>
     </div>
 </div>
-<?php include __DIR__ . '/parts/scripts.php'; ?>
+<?php include  '../yeh/parts/scripts.php'; ?>
 <script>
     function checkForm() {
         const fd = new FormData(document.form1);
@@ -198,4 +198,4 @@ $L_rows = $pdo->query($L_sql)->fetchAll();
             })
     })
 </script>
-<?php include __DIR__ . '/parts/html-foot.php'; ?>
+<?php include '../yeh/parts/html-foot.php'; ?>
