@@ -44,7 +44,7 @@ $rows = $pdo->query($sql)->fetchAll();
         </nav>
         <?php foreach ($rows as $r) : ?>
             <div class="card" style="width: 18rem;">
-                <img src="./imgs/<?= $r['rental_img'] ?>" class="card-img-top" alt="...">
+                <img src="../bert/rental/<?= $r['rental_img'] ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><?= $r['rental_product_name'] ?></h5>
                     <div>

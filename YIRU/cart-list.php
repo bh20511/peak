@@ -15,8 +15,8 @@ if (!isset($_SESSION['renCart'])) {
 }
 
 ?>
-<?php include '../yeh/parts/html-head.php';?>
-<?php include '../yeh/parts/nav-m.php';?>
+<?php include '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav-m.php'; ?>
 <style>
     .btn-primary:hover {
         --bs-btn-hover-bg: #cfe2ff;
@@ -87,7 +87,7 @@ if (!isset($_SESSION['renCart'])) {
                                     </a>
                                 </td>
                                 <td>
-                                    <img src="./imgs/<?= $p['picture'] ?>" alt="" width="150px">
+                                    <img src="../ZX/picture/<?= $p['picture'] ?>" alt="" width="150px">
                                 </td>
                                 <td><?= $p['product_name'] ?></td>
                                 <td class="price">$<?= $p['product_price'] ?></td>
@@ -136,7 +136,7 @@ if (!isset($_SESSION['renCart'])) {
                                     </a>
                                 </td>
                                 <td>
-                                    <img src="./imgs/<?= $ren['rental_img'] ?>" alt="" width="150px">
+                                    <img src="../bert/rental/<?= $ren['rental_img'] ?>" alt="" width="150px">
                                 </td>
                                 <td><?= $ren['rental_product_name'] ?></td>
                                 <td class="price">$<?= $ren['rental_price'] ?></td>
@@ -174,10 +174,7 @@ if (!isset($_SESSION['renCart'])) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        foreach ($_SESSION['camCart'] as $cam) :
-
-                        ?>
+                        <?php foreach ($_SESSION['camCart'] as $cam) : ?>
                             <tr data_sid="<?= $cam['sid'] ?>" class="item">
                                 <td>
                                     <a href="javascript: delete_it4(<?= $cam['sid'] ?>)" data_sid="<?= $cam['sid'] ?>">
@@ -235,7 +232,7 @@ if (!isset($_SESSION['renCart'])) {
                                     </a>
                                 </td>
                                 <td>
-                                    <img src="./imgs/<?= $r['room_img'] ?>" alt="" width="150px">
+                                    <img src="../wei/uploads/<?= $r['room_img'] ?>" alt="" width="150px">
                                 </td>
                                 <td><?= $r['room_name'] ?></td>
                                 <td class="price">$<?= $r['room_price'] ?></td>
@@ -267,7 +264,7 @@ if (!isset($_SESSION['renCart'])) {
 
 
 
-<?php include '../yeh/parts/scripts.php';?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     let total = document.querySelectorAll('.total');
     let price = document.querySelectorAll('.price');
@@ -441,9 +438,9 @@ if (!isset($_SESSION['renCart'])) {
         })
     }
     //購物車沒商品 隱藏btn
-    let tbody = document.querySelector('tbody');
+    let td = document.querySelectorAll('td');
     let btn = document.querySelector('.btn-info')
-    if (tbody.textContent == 0) {
+    if (td.length == 0) {
         btn.style.display = "none"
     }
 
@@ -477,4 +474,4 @@ if (!isset($_SESSION['renCart'])) {
         })
     }
 </script>
-<?php include '../yeh/parts/html-foot.php';?>
+<?php include '../yeh/parts/html-foot.php'; ?>

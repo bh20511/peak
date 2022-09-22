@@ -74,7 +74,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <?php foreach ($rows as $r) : ?>
 
             <div class="card" style="width: 18rem;">
-                <img src="./imgs/<?= $r['picture'] ?>.jpg" class="card-img-top" alt="...">
+                <img src="../ZX/picture/<?= $r['picture'] ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><?= $r['product_name'] ?></h5>
                     <div>

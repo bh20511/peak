@@ -66,7 +66,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <?php foreach ($rows as $r) : ?>
 
             <div class="card" style="width: 20rem;">
-                <img src="./imgs/<?= $r['room_img'] ?>" class="card-img-top">
+                <img src="../wei/uploads/<?= $r['room_img'] ?>" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title"><?= $r['room_name'] ?></h5>
                     <p class="card-text"><?= $r['room_details'] ?></p>
