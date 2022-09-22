@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/parts/member-req.php'; ?>
-<?php require __DIR__ . './parts/connect-db.php'; ?>
+<?php require __DIR__ . '/parts/connect-db.php'; ?>
 <?php
 $pageName = "members";
 
@@ -28,6 +28,7 @@ if (empty($r)) {
                     <form name="form1" onsubmit="checkForm(); return false;" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="member_sid" value="<?= $r['member_sid'] ?>">
                         <input type="hidden" name="avatar" value="<?= $r['avatar'] ?>">
+                        <input type="hidden" name="oldpassword" value="<?= $r['password'] ?>">
                         <div class="previewbox">
                             <img id="preview2" src="./avatars/<?= $r['avatar'] ?>" alt="">
                             <!-- TO DO onload修改CSS -->
@@ -51,10 +52,10 @@ if (empty($r)) {
                             <label for="showpass">顯示密碼</label>
                         </div>
 
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">密碼確認</label>
                             <input type="password" class="form-control" id="exampleInputPassword2">
-                        </div> -->
+                        </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">手機號碼</label>
                             <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}" value="<?= $r['mobile'] ?>">
@@ -83,6 +84,13 @@ if (empty($r)) {
 <?php require __DIR__ . '/parts/scripts.php'; ?>
 <script>
     function checkForm() {
+        const pass = document.getElementById("exampleInputPassword1");
+        const pass2 = document.getElementById("exampleInputPassword2");
+        if(pass.value !== pass2.value){
+            alert("請輸入正確的確認密碼");
+            return false;
+        }
+
         const fd = new FormData(document.form1);
         fetch('member-edit-api-m.php', {
             method: 'POST',
@@ -117,10 +125,13 @@ if (empty($r)) {
 
     function showPw() {
         let pass = document.getElementById("exampleInputPassword1");
+        let pass2 = document.getElementById("exampleInputPassword2");
         if (pass.type === "password") {
             pass.type = "text";
+            pass2.type = "text";
         } else {
             pass.type = "password";
+            pass2.type = "password";
         }
     }
 </script>
