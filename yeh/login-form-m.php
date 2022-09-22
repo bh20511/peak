@@ -1,5 +1,9 @@
 <?php require __DIR__ . '/parts/connect-db.php'; ?>
-<?php $pageName = "login"; ?>
+<?php $pageName = "login"; 
+if(!empty($_SESSION['member'])){
+    header('Location: ../yeh/member-info.php');
+    exit;
+}?>
 <?php require __DIR__ . '/parts/html-head.php'; ?>
 <?php require __DIR__ . '/parts/styles.php'; ?>
 <?php require __DIR__ . '/parts/nav-m.php'; ?>

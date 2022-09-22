@@ -1,5 +1,5 @@
 <?php require __DIR__ . '/parts/member-req.php'; ?>
-<?php require __DIR__ . './parts/connect-db.php'; ?>
+<?php require __DIR__ . '/parts/connect-db.php'; ?>
 <?php
 $pageName = "members";
 
