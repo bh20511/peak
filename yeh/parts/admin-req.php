@@ -4,6 +4,6 @@ if(! isset($_SESSIONS)){
 }
 
 if(empty($_SESSION['admin'])){
-    header('Location: login-form.php');
+    header('Location: ../yeh/login-form.php');
     exit;
 }

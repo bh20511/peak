@@ -29,7 +29,7 @@
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <?php if (empty($_SESSION['admin'])) : ?>
                         <li class="nav-item">
-                            <a class="nav-link <?= $pageName=='login' ? 'active' : ''  ?>" href="login-form.php">登入</a>
+                            <a class="nav-link <?= $pageName=='login' ? 'active' : ''  ?>" href="../yeh/login-form.php">登入</a>
                         </li>
                     <?php else : ?>
                         <li class="nav-item">

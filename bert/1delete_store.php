@@ -1,5 +1,6 @@
 <?php 
-require '../yeh//parts/connect-db.php';
+require '../yeh/parts/admin-req.php';
+require '../yeh/parts/connect-db.php';
 
 $store_sid = isset($_GET['store_sid'])? intval($_GET['store_sid']):0;
 

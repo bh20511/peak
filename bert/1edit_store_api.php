@@ -1,3 +1,4 @@
+<?php require '../yeh/parts/admin-req.php';?>
 <?php 
 require '../yeh/parts/connect-db.php';
 $folder = __DIR__. '/store/';
