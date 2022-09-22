@@ -28,6 +28,7 @@ if (empty($r)) {
                     <form name="form1" onsubmit="checkForm(); return false;" enctype="multipart/form-data" novalidate>
                         <input type="hidden" name="member_sid" value="<?= $r['member_sid'] ?>">
                         <input type="hidden" name="avatar" value="<?= $r['avatar'] ?>">
+                        <input type="hidden" name="oldpassword" value="<?= $r['password'] ?>">
                         <div class="previewbox">
                             <img id="preview2" src="./avatars/<?= $r['avatar'] ?>" alt="">
                             <!-- TO DO onload修改CSS -->
