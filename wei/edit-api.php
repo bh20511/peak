@@ -1,6 +1,6 @@
 <?php
-// require __DIR__ . '/parts/admin-required.php';
-require __DIR__ . '/parts/connect_db.php';
+require '../yeh/parts/admin-req.php';
+require '../yeh/parts/connect-db.php';
 
 header('Content-Type: application/json');
 

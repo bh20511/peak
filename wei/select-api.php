@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require '../yeh/parts/connect-db.php';
 // unset($_SESSION['lo']);
 
 // if (!isset($_SESSION['lo'])) {

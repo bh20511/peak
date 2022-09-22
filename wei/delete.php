@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/parts/connect_db.php';
+require '../yeh/parts/connect_-db.php';
 
 $sid = isset($_GET['room_sid']) ? intval($_GET['room_sid']) : 0;
 
