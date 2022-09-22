@@ -36,10 +36,10 @@ $pageName = "members";
                             <label for="showpass">顯示密碼</label>
                         </div>
 
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">密碼確認</label>
                             <input type="password" class="form-control" id="exampleInputPassword2">
-                        </div> -->
+                        </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">手機號碼</label>
                             <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}">
@@ -68,6 +68,13 @@ $pageName = "members";
 <?php require __DIR__ . '/parts/scripts.php'; ?>
 <script>
     function checkForm() {
+        const pass = document.getElementById("exampleInputPassword1");
+        const pass2 = document.getElementById("exampleInputPassword2");
+        if(pass.value !== pass2.value){
+            alert("請輸入正確的確認密碼");
+            return false;
+        }
+
         const fd = new FormData(document.form1);
         fetch('member-insert-api-m.php', {
             method: 'POST',
@@ -85,10 +92,13 @@ $pageName = "members";
 
     function showPw() {
         let pass = document.getElementById("exampleInputPassword1");
+        let pass2 = document.getElementById("exampleInputPassword2");
         if (pass.type === "password") {
             pass.type = "text";
+            pass2.type = "text";
         } else {
             pass.type = "password";
+            pass2.type = "password";
         }
     }
 
