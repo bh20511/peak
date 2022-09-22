@@ -46,8 +46,8 @@ $output = [
 // echo json_encode($output);
 // exit; // 後面的都不執行
 ?>
-<?php require  '../yeh/parts/html-head.php'; ?>
-<?php include  '../yeh/parts/navbar copy.php'; ?>
+<?php require '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 
 <div class="container">
     <div class="row">
@@ -72,16 +72,18 @@ $output = [
                             <i class="fa-sharp fa-solid fa-arrow-right"></i>
                         </a>
                     </li>
+
                 </ul>
+                <button id="insert" type="button" class="btn btn-primary">新增房型</button>
             </nav>
-            <button id="insert" type="button" class="btn btn-primary">新增房型</button>
+
         </div>
     </div>
 
 </div>
 
 
-<?php include '../yeh/list-table-admin.php'; ?>
+<?php include 'list-table-admin.php'; ?>
 <?php include '../yeh/parts/scripts.php'; ?>
 
 <script>
