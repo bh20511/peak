@@ -21,7 +21,7 @@
                             <a class="nav-link <?= $pageName == 'rental_list' ? 'active' : ''  ?>" href="../bert/2list_rental.php">租借</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../N7/camp_list.php">活動</a>
+                            <a class="nav-link <?= $pageName == 'camp_list' ? 'active' : ''  ?>" href="../N7/camp_list.php">活動</a>
                         </li>
                         <!-- <li class="nav-item">
                         <a class="nav-link" href="#">訂單</a>
