@@ -71,12 +71,14 @@ $output = [
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col" style="display:flex; justify-content:space-between;">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
 
                     <li class="page-item <?= 1 == $page ? 'disabled' : 0 ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-left"></i>
+                        </a>
                     </li>
 
                     <?php for ($i = 1; $i <= $totalpage; $i++) : ?>
@@ -86,12 +88,17 @@ $output = [
                     <?php endfor; ?>
 
                     <li class="page-item <?= $totalpage == $page ? 'disabled' : 0 ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fa-solid fa-circle-arrow-right"></i>
+                        </a>
                     </li>
 
                 </ul>
             </nav>
-            <h1>商品</h1>
+            <button id="insert" type="button" class="btn btn-primary">新增商品</button>
+        </div>
+
+        <div class="row">
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -157,6 +164,8 @@ $output = [
         </div>
 
     </div>
+
+
 </div>
 
 
@@ -171,5 +180,10 @@ $output = [
             location.href = `delete_product.php?sid=${sid}`;
         }
     }
+
+    const insert = document.querySelector("#insert");
+    insert.addEventListener("click", event => {
+        location.href = 'insert-product.php'
+    })
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
