@@ -52,9 +52,8 @@ if (!empty($_SESSION['admin'])) {
             alert("登入成功");
             // swal("登入成功!", "", "success");
             // location.href = 'members-list.php';
-            <?php $from = isset($_GET['from'])? $_GET['from'] : ""; ?>
-            if ("<?= isset($_GET['from']); ?>") {
-                location.href = '<?= $from ?>';
+            if (<?= isset($_GET['from']); ?>) {
+                location.href = '<?= isset($_GET['from'])? $_GET['from'] : ""; ?>';
             } 
             location.href = 'members-list.php';
             // location.reload();
