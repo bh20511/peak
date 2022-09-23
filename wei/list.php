@@ -51,7 +51,7 @@ $output = [
 
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col" style="display:flex; justify-content:space-between;">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?php echo 1 == $page ? 'disabled' : '' ?>">
@@ -74,9 +74,9 @@ $output = [
                     </li>
 
                 </ul>
-                <button id="insert" type="button" class="btn btn-primary">新增房型</button>
+                
             </nav>
-
+            <button id="insert" type="button" class="btn btn-primary">新增房型</button>
         </div>
     </div>
 
