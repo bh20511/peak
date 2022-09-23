@@ -2,7 +2,7 @@
 if(!isset($_SESSION)){
     session_start();
 }
-unset($_SESSION['cart'],$_SESSION['rCart'],$_SESSION['tPrice']);
+unset($_SESSION['cart'],$_SESSION['rCart'],$_SESSION['tPrice'],$_SESSION['renCart'],$_SESSION['camCart']);
 $cr = 'cart-list.php';
 
 if(! isset($_SESSION['cart'])){

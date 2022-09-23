@@ -11,13 +11,15 @@ $qty = isset($_POST['qty']) ? intval($_POST['qty']) : 0;
 // R: 查看購物車內容
 // U: 更新, sid, qty
 // D: 移除項目, sid
+if (empty($_SESSION['rCart'][$sid]['start'])) {
+}
 
 if (!empty($sid)) {
     if (!empty($qty)) {
         // 新增或變更
         if (!empty($_SESSION['rCart'][$sid])) {
             // 已存在,變更(增加)
-            $_SESSION['rCart'][$sid]['qty'] = $_SESSION['rCart'][$sid]['qty']+ $qty;
+            $_SESSION['rCart'][$sid]['qty'] = $qty;
         } else {
             // 新增
             // TODO: 檢查資料表是不是有這個商品
@@ -31,10 +33,10 @@ if (!empty($sid)) {
         }
     } else {
         // 刪除項目
-        unset($_SESSION['roomCart'][$sid]);
+        unset($_SESSION['rCart'][$sid]);
     }
 }
 
 
 
-echo json_encode($_SESSION['roomCart'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+echo json_encode($_SESSION['rCart'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

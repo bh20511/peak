@@ -48,7 +48,7 @@ if (!isset($_SESSION['renCart'])) {
     }
 
     .form1 {
-        /* display: none; */
+        display: none;
     }
 </style>
 <form class="form1">
@@ -143,7 +143,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td class="price">$<?= $ren['rental_price'] ?></td>
                                 <td>
 
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change2()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $ren['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -183,13 +183,13 @@ if (!isset($_SESSION['renCart'])) {
                                     </a>
                                 </td>
                                 <td>
-                                    <img src="./imgs/<?= $cam['mainImage'] ?>" alt="" width="150px">
+                                    <img src="../N7/camp_uploads/<?= $cam['mainImage'] ?>" alt="" width="150px">
                                 </td>
                                 <td><?= $cam['name'] ?></td>
                                 <td class="price">$<?= $cam['price'] ?></td>
                                 <td>
 
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change3()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $cam['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -238,7 +238,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td><?= $r['room_name'] ?></td>
                                 <td class="price">$<?= $r['room_price'] ?></td>
                                 <td>
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change4()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $r['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -293,21 +293,23 @@ if (!isset($_SESSION['renCart'])) {
             }
         })
     });
-    //顯示金額
-    let totalAll = 0;
-    let toAll = document.querySelector('.toAll');
-    for (let i = 0; i < total.length; i++) {
-        total[i].textContent = `$${Number(price[i].textContent.split('$')[1] * sel[i].value)}`;
-        totalAll += Number(total[i].textContent.split('$')[1]);
+    //顯示金額.總金額
+    let test = () => {
+        let totalAll = 0;
+        let toAll = document.querySelector('.toAll');
+        for (let i = 0; i < total.length; i++) {
+            total[i].textContent = `$${Number(price[i].textContent.split('$')[1] * sel[i].value)}`;
+            totalAll += Number(total[i].textContent.split('$')[1]);
+        }
+        toAll.textContent = `$${totalAll}`;
     }
-    //總金額
-    toAll.textContent = `$${totalAll}`;
-    //更換數量
+    test();
+    //更換商品數量
     function change() {
         qty = event.target.value;
         let f_qty = document.querySelector('#qty');
         let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
-        let  money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
+        let money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
         let moneyAll = event.target.parentNode.parentNode.querySelector('.total');
         f_qty.value = qty;
         sid.value = f_sid;
@@ -318,14 +320,74 @@ if (!isset($_SESSION['renCart'])) {
             })
             .then(r => r.json())
             .then(obj => {
-                console.log(qty)
-                console.log(moneyAll)
-                changePrice(qty,money,moneyAll)
+                changePrice(qty, money, moneyAll)
             });
+            test()
+    }
+    //更換租借數量
+    function change2() {
+        qty = event.target.value;
+        let f_qty = document.querySelector('#qty');
+        let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
+        let money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
+        let moneyAll = event.target.parentNode.parentNode.querySelector('.total');
+        f_qty.value = qty;
+        sid.value = f_sid;
+        let fd = new FormData(document.querySelector('.form1'));
+        fetch('cart-api/renQty.php', {
+                method: "POST",
+                body: fd
+            })
+            .then(r => r.json())
+            .then(obj => {
+                changePrice(qty, money, moneyAll)
+            });
+            test()
+    }
+    //更換活動數量
+    function change3() {
+        qty = event.target.value;
+        let f_qty = document.querySelector('#qty');
+        let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
+        let money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
+        let moneyAll = event.target.parentNode.parentNode.querySelector('.total');
+        f_qty.value = qty;
+        sid.value = f_sid;
+        let fd = new FormData(document.querySelector('.form1'));
+        fetch('cart-api/camQty.php', {
+                method: "POST",
+                body: fd
+            })
+            .then(r => r.json())
+            .then(obj => {
+                changePrice(qty, money, moneyAll)
+            });
+            test()
+    }
+    //更換房間數量
+    function change4() {
+        qty = event.target.value;
+        let f_qty = document.querySelector('#qty');
+        let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
+        let money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
+        let moneyAll = event.target.parentNode.parentNode.querySelector('.total');
+        f_qty.value = qty;
+        sid.value = f_sid;
+        let fd = new FormData(document.querySelector('.form1'));
+        fetch('cart-api/roomQty.php', {
+                method: "POST",
+                body: fd
+            })
+            .then(r => r.json())
+            .then(obj => {
+                changePrice(qty, money, moneyAll)
+            });
+            test()
     }
     //更換數量同時更換價錢
-    function changePrice(a,b,c){
-        c.textContent = a * b
+    function changePrice(a, b, c) {
+        c.textContent = `$${a * b}`
+        console.log(c.textContent)
     }
 
     //刪除單筆商品
@@ -454,9 +516,10 @@ if (!isset($_SESSION['renCart'])) {
     if (td.length == 0) {
         btn.style.display = "none"
     }
-
+    //結帳
     function toBuy() {
         let tPrice = document.querySelector('#tPrice');
+        let toAll = document.querySelector('.toAll');
         tPrice.value = toAll.textContent.split('$')[1];
         let fd = new FormData(document.querySelector('.form1'));
         Swal.fire({

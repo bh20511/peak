@@ -10,7 +10,7 @@ if (!isset($_SESSION['tPrice'])) {
     $_SESSION['tPrice'] = [];
 }
 $_SESSION['tPrice'] = $_POST['tPrice'];
-
+$memberSid = $_SESSION['member']['member_sid'];
 
 $output = [
     'success' => false,
@@ -40,10 +40,10 @@ list($Y, $M, $D, $H, $I, $S) = $date;
 $order_num = implode('', $date);
 
 
-$m = 2;
+
 $stmt->execute([
     $order_num,
-    $m,
+    $memberSid,
     $_SESSION['tPrice'],
 ]);
 //回傳結果
