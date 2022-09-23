@@ -1,6 +1,6 @@
 <?php require '../yeh/parts/connect-db.php';
 
-$pageName = 'order';
+$pageName = 'order-back-list';
 
 $order = "SELECT * FROM `order`";
 $order_stmt = $pdo->query($order)->fetchAll();
@@ -34,12 +34,12 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 <style>
     .accordion-button {
         display: flex;
+
     }
 
     .accordion-button div {
-        width: 50%;
-
-
+        width: 33.33%;
+        align-items: center;
     }
 
     div.accordion-body.product {
@@ -120,7 +120,8 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 
-                                <div> 訂單編號 :<?= $o['order_num'] ?></div>
+                                <div> 會員編號 :<?= $o['member_sid'] ?></div>
+                                <div> 訂單編號 <?= $o['order_num'] ?></div>
                                 <div>金額 :<?= $o['total'] ?></div>
 
                             </button>
