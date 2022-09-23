@@ -92,7 +92,7 @@ $output = [
                 </ul>
             </nav>
             <h1>商品</h1>
-            <table class="table table-dark -columns">
+            <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">
