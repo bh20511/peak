@@ -1,4 +1,6 @@
-<?php require '../yeh/parts/connect-db.php';
+<?php require '../yeh/parts/admin-req.php';
+require '../yeh/parts/connect-db.php';
+
 
 $pageName = 'order-back-list';
 
@@ -187,9 +189,5 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
 <?php include '../yeh/parts/scripts.php'; ?>
 <script>
-    const btn = document.querySelector('#btn');
-    btn.addEventListener('click', () => {
-
-    })
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
