@@ -65,7 +65,7 @@ $output = [
     }
 
     .form1 {
-        display: none;
+        /* display: none; */
     }
 
     .card-body {

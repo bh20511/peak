@@ -12,4 +12,4 @@ header('Content-Type: application/json');
 // $tt = [];
 // $tt = [$cam,$ren,$c,$r];
 
-echo json_encode($_SESSION , JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+echo json_encode($_SESSION, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);

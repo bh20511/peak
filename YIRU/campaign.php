@@ -113,7 +113,7 @@ $output = [
         </nav> -->
         <?php foreach ($rows as $r) : ?>
             <div class="card" style="width: 18rem;">
-                <img src="./imgs/<?= $r['mainImage'] ?>" class="card-img-top" alt="...">
+                <img src="../N7/camp_uploads/<?= $r['mainImage'] ?>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title"><?= $r['name'] ?></h5>
                     <div>
