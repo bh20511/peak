@@ -159,9 +159,6 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                         活動資訊： <?= $q['name'] ?>
                                     </div>
                                     <div class="accordion-body camp">
-                                        數量： <?= $q['qty'] ?>
-                                    </div>
-                                    <div class="accordion-body camp">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
 
