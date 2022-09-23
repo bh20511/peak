@@ -54,9 +54,8 @@ if (!empty($_SESSION['admin'])) {
             // location.href = 'members-list.php';
             if ("<?= $_GET['from'] ?>") {
                 location.href = '<?= $_GET['from'] ?>';
-            } else {
-                location.href = 'members-list.php';
-            }
+            } 
+            location.href = 'members-list.php';
             // location.reload();
 
         } else {
