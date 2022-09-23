@@ -53,7 +53,7 @@ if(!empty($_SESSION['member'])){
         if (obj.success) {
             alert("登入成功");
             // swal("登入成功!", "", "success");
-            location.href = 'member-info.php';
+            location.href = '../YIRU/products.php';
         } else {
             alert(obj.error);
         }

@@ -70,7 +70,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
         width: 33.333%;
     } */
 </style>
-<?php include '../yeh/parts/nav-m.php'; ?>
+<?php include '../yeh/parts/nav.php'; ?>
 
 
 

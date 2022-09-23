@@ -1,7 +1,7 @@
 <?php
 require '../yeh/parts/admin-req.php';
 require '../yeh/parts/connect-db.php';
-$pageName = 'camp_insert_form';
+$pageName = 'camp_list';
 ?>
 
 <?php require  '../yeh/parts/html-head.php'; ?>

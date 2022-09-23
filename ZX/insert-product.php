@@ -1,7 +1,7 @@
 <?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php'; ?>
 <?php
-$pageName = 'insert-product';
+$pageName = 'product-list';
 ?>
 
 <?php
@@ -15,12 +15,6 @@ $rows2 = $pdo->query($sql2)->fetchAll();
 ?>
 <?php require '../yeh/parts/html-head.php'; ?>
 <style>
-    .wrap {
-        border-radius: 10px;
-        border: 1px solid black;
-        padding: 10px;
-    }
-
     .uuu {
         border: 5px solid red;
     }
@@ -37,87 +31,97 @@ $rows2 = $pdo->query($sql2)->fetchAll();
             <div class="wrap">
 
 
-                <img id="myimg" src="" alt="" width="300">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">新增商品
+                        </h5>
+                        <img id="myimg" src="" alt="" width="300">
 
-                <form name="form1" onsubmit="checkForm();return false;">
-                    <p>請選擇圖檔</p>
-                    <input type="file" name="single" accept="image/png,image/jpeg" id="btn">
+                        <form name="form1" onsubmit="checkForm();return false;">
 
-                    <div class="mb-3">
-                        <label for="product_name" class="form-label">品名</label>
-                        <input type="text" class="form-control" id="product_name" name="product_name">
+                            <input type="file" name="single" accept="image/png,image/jpeg" id="btn">
+
+                            <div class="mb-3">
+                                <label for="product_name" class="form-label">品名</label>
+                                <input type="text" class="form-control" id="product_name" name="product_name">
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="product_category_sid" class="form-label">種類</label>
+                                <br>
+                                <select name="product_category_sid" id="product_category_sid">
+                                    <option value="0">
+                                        請選種類
+                                    </option>
+
+                                    </option>
+                                    <?php foreach ($rows as $r) : ?>
+                                        <option value="<?= $r['product_category_sid'] ?>">
+                                            <?= $r['product_category'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="brand_sid" class="form-label">品牌</label>
+                                <br>
+                                <select name="brand_sid" id="brand_sid">
+                                    <option value="0">
+                                        請選品牌
+                                    </option>
+
+                                    </option>
+                                    <?php foreach ($rows2 as $x) : ?>
+                                        <option value="<?= $x['brand_sid'] ?>">
+                                            <?= $x['brand_name'] ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+
+
+                            <div class="mb-3">
+                                <label for="product_price" class="form-label">價格</label>
+                                <input type="text" class="form-control" id="product_price" name="product_price">
+                            </div>
+                            <div class="mb-3">
+                                <label for="product_inventory" class="form-label">庫存</label>
+                                <input type="text" class="form-control" id="product_inventory" name="product_inventory">
+                            </div>
+                            <div class="mb-3">
+                                <label for="product_description" class="form-label">商品說明</label>
+                                <input type="text" class="form-control" id="product_description" name="product_description">
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">送出檔案</button>
+                        </form>
                     </div>
+                </div>
+            </div>
 
 
 
-                    <div class="mb-3">
-                        <label for="product_category_sid" class="form-label">種類</label>
-                        <br>
-                        <select name="product_category_sid" id="product_category_sid">
-                            <option value="0">
-                                請選種類
-                            </option>
 
-                            </option>
-                            <?php foreach ($rows as $r) : ?>
-                                <option value="<?= $r['product_category_sid'] ?>">
-                                    <?= $r['product_category'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-
-                    <div class="mb-3">
-                        <label for="brand_sid" class="form-label">品牌</label>
-                        <br>
-                        <select name="brand_sid" id="brand_sid">
-                            <option value="0">
-                                請選品牌
-                            </option>
-
-                            </option>
-                            <?php foreach ($rows2 as $x) : ?>
-                                <option value="<?= $x['brand_sid'] ?>">
-                                    <?= $x['brand_name'] ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-
-
-                    <div class="mb-3">
-                        <label for="product_price" class="form-label">價格</label>
-                        <input type="text" class="form-control" id="product_price" name="product_price">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product_inventory" class="form-label">庫存</label>
-                        <input type="text" class="form-control" id="product_inventory" name="product_inventory">
-                    </div>
-                    <div class="mb-3">
-                        <label for="product_description" class="form-label">商品說明</label>
-                        <input type="text" class="form-control" id="product_description" name="product_description">
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary">送出檔案</button>
-                </form>
-
-                <!-- <form name="form2" style="display:none">
+            <!-- <form name="form2" style="display:none">
                     <label for="">圖片</label>
 
                 </form>
                 <div>請先填寫以上欄位，再上傳圖檔</div>
                 <button onclick="document.form2.single.click()"> 選檔案上傳圖檔</button>
                 <img id="myimg" src="" alt="" width="300"> -->
-            </div>
-
-
-
         </div>
+
+
+
     </div>
+</div>
 </div>
 
 
