@@ -44,22 +44,22 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
     }
 
     div.accordion-body.product {
-        background-color: lightpink;
+        background-color: #F3BF88;
 
     }
 
     div.accordion-body.room {
-        background-color: lightyellow;
+        background-color: #E9C3DC;
 
     }
 
     div.accordion-body.rental {
-        background-color: lightblue;
+        background-color: #A0CEA8;
 
     }
 
     div.accordion-body.camp {
-        background-color: lightgreen;
+        background-color: #A2D7DD;
 
     }
 
