@@ -79,7 +79,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
     <div class="row">
         <div class="col">
             <p>
-                <a href="../yeh/members-list.php?page=<?= $_GET['page'] ?>">
+                <a href="../yeh/members-list.php?page=<?= $_GET['page'] ?>&find=<?= $_GET['find'] ?>">
                     <button type="button" class="btn btn-primary mb-3 mt-3">
                         返回會員資料
                     </button>

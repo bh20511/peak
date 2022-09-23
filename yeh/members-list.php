@@ -5,14 +5,28 @@ $pageName = "members";
 
 $perPage = 10;
 
+$find = isset($_GET['find']) ? $_GET['find'] : "";
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$t_sql = "SELECT COUNT(1) FROM `members`";
+// echo $find;
+
+$t_sql = "";
+if ($find == "") {
+    $t_sql = "SELECT COUNT(1) FROM `members`";
+} else {
+    // $t_sql = sprintf("SELECT * FROM `members` WHERE `mobile`LIKE "%s%"" , $find);
+    $t_sql = "SELECT COUNT(1) FROM `members` WHERE `mobile` LIKE '".$find."%'" ;
+}
+
+// print_r($t_sql);
+
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+// echo $totalRows ;
 
 $totalPages = ceil($totalRows / $perPage);
 
-$rows = [];
+$row = [];
 
 if ($totalRows) {
     if ($page < 1) {
@@ -24,14 +38,31 @@ if ($totalRows) {
         exit;
     }
 
-    //在SQL資料庫中該page要選取的資料範圍
-    $sql = sprintf(
-        "SELECT * FROM `members` ORDER BY `member_sid` DESC LIMIT %s, %s",
-        ($page - 1) * $perPage,
-        $perPage
-    );
-
+    // // 在SQL資料庫中該page要選取的資料範圍(沒有find)
+    if ($find == "") {
+        $sql = sprintf(
+            "SELECT * FROM `members` ORDER BY `member_sid` DESC LIMIT %s, %s",
+            ($page - 1) * $perPage,
+            $perPage
+        );
+    } else {
+    //     $sql = sprintf(
+    //         "SELECT * FROM `members` ORDER BY `member_sid` WHERE `name` LIKE %s DESC LIMIT %s, %s",
+    //         $find,
+    //         ($page - 1) * $perPage,
+    //         $perPage
+    //     );
+        //  $pageIndex = ($page - 1) * $perPage;
+        //  $sql = "SELECT * FROM `members` ORDER BY `member_sid` WHERE `mobile` LIKE'".$find."%' DESC LIMIT "
+        //  .$pageIndex.",".$perPage.""; 
+        $sql1 = "SELECT * FROM `members` WHERE `mobile` LIKE '".$find."%'"."ORDER BY `member_sid` DESC";
+        $sql2 = sprintf(" LIMIT %s, %s",($page - 1) * $perPage, $perPage);
+        $sql = $sql1.$sql2;
+        
+    }
+    // echo $sql;
     $row = $pdo->query($sql)->fetchAll();
+    // print_r($row);
 }
 
 ?>
@@ -56,7 +87,7 @@ if ($totalRows) {
                     if ($i >= 1 and $i <= $totalPages) :
                 ?>
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                            <a class="page-link" href="?page=<?= $i ?>&find=<?= $find ?>"><?= $i ?></a>
                         </li>
                 <?php
                     endif;
@@ -68,11 +99,18 @@ if ($totalRows) {
                 </li>
             </ul>
         </nav>
+        <div>
+        <input type="text" id="find" name="find">
+            <button type="button" class="btn btn-secondary" onclick="find()">
+                以手機搜尋
+            </button>
+        
         <a href="member-insert-form.php">
             <button type="button" class="btn btn-primary">
                 新增資料
             </button>
         </a>
+        </div>
     </div>
     <!-- tables -->
     <div class="row">
@@ -125,7 +163,7 @@ if ($totalRows) {
                                 <?php endif; ?>
                             </td>
                             <td><?= $r['created_at'] ?></td>
-                            <td><a href="member-order.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>">瀏覽</a></td>
+                            <td><a href="member-order.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>&find=<?= $find ?>">瀏覽</a></td>
                             <td>
                                 <a href="member-edit-form.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
@@ -148,6 +186,12 @@ if ($totalRows) {
         if (confirm(`是否刪除#${member_sid}的資料?`)) {
             location.href = `member_delete.php?member_sid=${member_sid}`;
         }
+    }
+
+    function find(){
+        let find = document.querySelector("#find").value;
+        console.log(find);
+        location.href = `members-list.php?find=${find}`;
     }
 </script>
 <?php require __DIR__ . '/parts/html-foot.php'; ?>
