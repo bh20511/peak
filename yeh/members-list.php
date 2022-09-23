@@ -94,6 +94,7 @@ if ($totalRows) {
                     <th scope="col">高度總計</th> -->
                         <th scope="col">頭像</th>
                         <th scope="col">創建時間</th>
+                        <th scope="col">訂單</th>
                         <th scope="col">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </th>
@@ -124,6 +125,7 @@ if ($totalRows) {
                                 <?php endif; ?>
                             </td>
                             <td><?= $r['created_at'] ?></td>
+                            <td><a href="member-order.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>">瀏覽</a></td>
                             <td>
                                 <a href="member-edit-form.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>
