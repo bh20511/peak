@@ -11,7 +11,7 @@ join product on product_order.products_sid= product.product_sid where order.memb
 $product_order_product = $pdo->query($sql)->fetchAll();
 
 //訂房
-$sql2 = "SELECT * FROM `order`join `booking_order` on order.order_num = booking_order.order_num 
+$sql2 = "SELECT * FROM `order`join `booking_order` on `order`.order_num = booking_order.order_num 
 join room on booking_order.room_sid= room.room_sid where order.member_sid=$m_s";
 $product_order_room = $pdo->query($sql2)->fetchAll();
 
@@ -120,6 +120,12 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body room">
                                         訂房資訊： <?= $q['room_name'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        入住時間： <?= $q['start'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        退房時間： <?= $q['end'] ?>
                                     </div>
                                     <div class="accordion-body room">
                                         人數： <?= $q['qty'] ?>

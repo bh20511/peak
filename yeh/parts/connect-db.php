@@ -6,6 +6,12 @@ $db_name = 'hiking';
 $db_user = 'mountains';
 $db_pass = '1214';
 
+//在家用
+// $db_host = 'localhost';
+// $db_name = 'hiking';
+// $db_user = 'root';
+// $db_pass = 'root';
+
 //data source nama
 $dsn = "mysql:host={$db_host};dbname={$db_name};charset=utf8";
 
