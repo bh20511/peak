@@ -3,7 +3,7 @@
 
 
 <?php
-$pagename = 'brand-list'; // 設置當前所在頁面
+$pageName = 'brand-list'; // 設置當前所在頁面
 $prepage = 30; // 每頁5個
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;  //設置第幾頁面，如果沒有預設都是第一頁
 $t_sql = "SELECT count(1) FROM brand ";

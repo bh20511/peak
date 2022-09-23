@@ -1,5 +1,12 @@
 <style>
-    nav.navbar .nav-item .nav-link.active {
+    .nav-item .nav-link.active {
+        border-radius: 5px;
+        background-color: #0d6efd;
+        color: white;
+        font-weight: 800;
+    }
+
+    /* nav.navbar .nav-item .nav-link.active {
         border-radius: 5px;
         background-color: #0d6efd;
         color: white;
@@ -11,7 +18,7 @@
         background-color: #0d6efd;
         color: white;
         font-weight: 800;
-    }
+    } */
 
     /* highlight目前active頁面的CSS */
     .previewbox {
@@ -21,7 +28,7 @@
         border-radius: 50%;
         outline: 1px solid #ccc;
         overflow: hidden;
-        
+
     }
 
     #preview2 {
@@ -29,5 +36,4 @@
         height: 100%;
         object-fit: cover;
     }
-
 </style>

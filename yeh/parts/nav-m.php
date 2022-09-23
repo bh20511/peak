@@ -29,6 +29,7 @@
         padding: 10px;
     }
 </style>
+<body>
 <div class="container">
     <nav class="navbar navbar-expand-lg bg-light">
         <div class="container-fluid">

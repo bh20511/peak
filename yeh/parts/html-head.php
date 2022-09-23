@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,4 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css" integrity="sha512-hwwdtOTYkQwW2sedIsbuP1h0mWeJe/hFOfsvNKpRB3CkRxq8EW7QMheec1Sgd8prYxGm1OM9OZcGW7/GUud5Fw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Members</title>
 
-
+    <style>
+        .nav-item .nav-link.active {
+            border-radius: 5px;
+            background-color: #0d6efd;
+            color: white;
+            font-weight: 800;
+        }
+    </style>

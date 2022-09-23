@@ -1,7 +1,7 @@
 <?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php'; ?>
 <?php
-$pagename = 'insert-product';
+$pageName = 'insert-product';
 ?>
 
 <?php

@@ -2,7 +2,7 @@
 <?php require '../yeh/parts/connect-db.php'; ?>
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php
-$pagename = 'insert-brand';
+$pageName = 'insert-brand';
 ?>
 
 <style>

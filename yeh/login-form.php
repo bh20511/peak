@@ -51,7 +51,10 @@ if(!empty($_SESSION['admin'])){
         if (obj.success) {
             alert("登入成功");
             // swal("登入成功!", "", "success");
-            location.href = 'members-list.php';
+            // location.href = 'members-list.php';
+            location.href = '<?= $_GET['from'] ?>';
+            // location.reload();
+            
         } else {
             alert(obj.error);
         }
