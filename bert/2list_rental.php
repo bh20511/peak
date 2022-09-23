@@ -144,5 +144,9 @@ $output = [
             location.href = `2delete_rental.php?rental_product_sid=${a}`;
         }
     }
+    const insert = document.querySelector("#insert");
+    insert.addEventListener("click", event => {
+        location.href = '2add_rental.php'
+    })
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
