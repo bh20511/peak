@@ -9,7 +9,7 @@ $p_sql = "SELECT COUNT(1) FROM `product`";
 // fetch(PDO::FETCH_NUM)[0]; //去掉欄位 .[0]只取值 得到有幾行的資料
 $totalrows = $pdo->query($p_sql)->fetch(PDO::FETCH_NUM)[0];
 // //每頁放4筆
-$perpage = 4;
+$perpage = 12;
 // //總共有幾頁 
 $totalpage = ceil($totalrows / $perpage);
 
@@ -84,7 +84,9 @@ $output = [
             <ul class="pagination">
 
                 <li class="page-item <?= 1 == $page ? 'disabled' : 0 ?>">
-                    <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <i class="fa-solid fa-caret-left"></i>
+                    </a>
                 </li>
 
                 <?php for ($i = 1; $i <= $totalpage; $i++) : ?>
@@ -94,7 +96,9 @@ $output = [
                 <?php endfor; ?>
 
                 <li class="page-item <?= $totalpage == $page ? 'disabled' : 0 ?>">
-                    <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <i class="fa-solid fa-caret-right"></i>
+                    </a>
                 </li>
 
             </ul>
