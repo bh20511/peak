@@ -1,6 +1,6 @@
 <?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php';
-$pageName = 'list';
+$pageName = 'rental_list';
 
 $perPage = 20; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;

@@ -11,13 +11,13 @@
                         <a class="nav-link <?= $pageName=='members' ? 'active' : ''  ?>" href="../yeh/members-list.php">會員</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="list-product.php">商品</a>
+                        <a class="nav-link <?= $pageName=='product-list' ? 'active' : ''  ?>" href="../ZX/list-product.php">商品</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">訂房</a>
+                        <a class="nav-link <?= $pageName=='room_list' ? 'active' : ''  ?>" href="../wei/list.php">訂房</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">租借</a>
+                        <a class="nav-link <?= $pageName=='rental_list' ? 'active' : ''  ?>" href="../bert/2list_rental.php">租借</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">活動</a>
