@@ -89,7 +89,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td>
                                     <img src="../ZX/picture/<?= $p['picture'] ?>" alt="" width="150px">
                                 </td>
-                                <td><?= $p['product_name'] ?></td>
+                                <td style="max-width:250px ;"><?= $p['product_name'] ?></td>
                                 <td class="price">$<?= $p['product_price'] ?></td>
                                 <td>
 

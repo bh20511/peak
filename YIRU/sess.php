@@ -3,17 +3,13 @@ session_start();
 
 // header('Content-Type: text/plain');
 
-// foreach($_SESSION as $i){
-//     echo json_encode($i , JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
-// }
-
 header('Content-Type: application/json');
-$cam = $_SESSION['camCart'];
-$ren = $_SESSION['renCart'];
-$c = $_SESSION['cart'];
-$r = $_SESSION['rCart'];
+// $cam = $_SESSION['camCart'];
+// $ren = $_SESSION['renCart'];
+// $c = $_SESSION['cart'];
+// $r = $_SESSION['rCart'];
 
-$tt = [];
-$tt = [$cam,$ren,$c,$r];
+// $tt = [];
+// $tt = [$cam,$ren,$c,$r];
 
-echo json_encode($tt , JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+echo json_encode($_SESSION , JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
