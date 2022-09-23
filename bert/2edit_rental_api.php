@@ -50,7 +50,7 @@ if(empty($_FILES['single']['name'])){
             $_POST['rental_product_sid']
         ]);
     } catch(PDOException $ex) {
-        $output['error'] = $ex->getMessage();
+        $output['error'] = '資料沒有修改,請檢查欄位資訊';
     }
 }else{
     $extMap = [
@@ -105,7 +105,7 @@ try {
         $_POST['rental_product_sid']
     ]);
 } catch(PDOException $ex) {
-    $output['error'] = $ex->getMessage();
+    $output['error'] = '資料沒有修改,請檢查欄位資訊';
 }
 }
 
@@ -116,6 +116,6 @@ if($stmt->rowCount()){
     $output['success'] = true;
 } else {
     if(empty($output['error']))
-        $output['error'] = '資料沒有修改';
+        $output['error'] = '資料沒有修改,請檢查欄位資訊';
 }
 echo json_encode($output, JSON_UNESCAPED_UNICODE); 

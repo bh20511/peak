@@ -1,6 +1,6 @@
 <?php require '../yeh/parts/connect-db.php';
 
-// $sql = "SELECT COUNT(1) FROM `mountain` GROUP BY `level` where  ";
+$sql = "SELECT COUNT(1) FROM `mountain` GROUP BY `level` where  ";
 
 // $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_NUM);
 // $a = [];
@@ -25,7 +25,7 @@
 //         array_push($a,$x);
 //     }
 // }
-// print_r($rows)
-// echo json_encode($output);
+// // print_r($rows)
+// // echo json_encode($output);
 // echo $rows['COUNT(1)']
-?>
+// ?>

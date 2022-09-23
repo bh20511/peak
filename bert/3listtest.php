@@ -5,57 +5,37 @@ $pageName = 'rental_list';
 $perPage = 20; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-// 算總筆數
-$t_sql = "SELECT COUNT(1) FROM rental ";
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-
-$totalPages = ceil($totalRows / $perPage);
-
-$rows = [];
-// 如果有資料
-if ($totalRows) {
-    if ($page < 1) {
-        header('Location: ?page=1');
-        exit;
-    }
-    if ($page > $totalPages) {
-        header('Location: ?page=' . $totalPages);
-        exit;
-    }
-
-    $sql = sprintf(
-        "SELECT * FROM rental  
+$sql = sprintf(
+    "SELECT * FROM rental  
         JOIN product_category 
         ON rental.product_category_sid=product_category.product_category_sid 
         JOIN brand
         ON brand.brand_sid= rental.brand_sid
-        ORDER BY rental_product_sid 
-        DESC LIMIT %s, %s ",
-        ($page - 1) * $perPage,
-        $perPage
-    );
-    // $sql = "SELECT * FROM rental";
-    $rows = $pdo->query($sql)->fetchAll();
-}
-// echo json_encode($rows); exit;
-$output = [
-    'totalRows' => $totalRows,
-    'totalPages' => $totalPages,
-    'page' => $page,
-    'rows' => $rows,
-    'perPage' => $perPage,
-];
+        WHERE rental_price > %s
+        ORDER BY rental_product_sid",
+    $_GET['money']
+);
 
-// echo json_encode($output); exit;
+
+$rows = $pdo->query($sql)->fetchAll();
+
+
+// $output = [
+//     'totalRows' => $totalRows,
+//     'totalPages' => $totalPages,
+//     'page' => $page,
+//     'rows' => $rows,
+//     'perPage' => $perPage,
+// ];
+
+
 ?>
-
-
-
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php include '../yeh/parts/nav.php'; ?>
 
 <div class="container">
     <div class="row">
+
         <form id="form2" name="form2">
             <label for="">價格大於</label>
             <input type="text" name="money" id="hey" style="width:75px;">
@@ -70,7 +50,7 @@ $output = [
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
                     </li>
-
+                    <!-- 
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
                     ?>
@@ -79,7 +59,7 @@ $output = [
                             </li>
                     <?php
                         endif;
-                    endfor; ?>
+                    endfor; ?> -->
 
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page + 1 ?>">
@@ -149,13 +129,6 @@ $output = [
         let money = document.querySelector("#hey").value;
         location.href = '3listtest.php?money=' + money;
     };
-
-
-
-
-
-
-
 
 
     const insert = document.querySelector("#insert");
