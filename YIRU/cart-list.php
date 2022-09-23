@@ -94,7 +94,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td class="price">$<?= $p['product_price'] ?></td>
                                 <td>
 
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change1()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $p['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -143,7 +143,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td class="price">$<?= $ren['rental_price'] ?></td>
                                 <td>
 
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change2()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $ren['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -189,7 +189,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td class="price">$<?= $cam['price'] ?></td>
                                 <td>
 
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change3()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $cam['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -238,7 +238,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <td><?= $r['room_name'] ?></td>
                                 <td class="price">$<?= $r['room_price'] ?></td>
                                 <td>
-                                    <select class="form-select" onchange="change()">
+                                    <select class="form-select" onchange="change4()">
                                         <?php for ($i = 1; $i <= 10; $i++) : ?>
                                             <option value="<?= $i ?>" <?= $r['qty'] == $i ? "selected" : "" ?> class="op"><?= $i ?></option>
                                         <?php endfor; ?>
@@ -296,7 +296,6 @@ if (!isset($_SESSION['renCart'])) {
     //顯示金額
     let totalAll = 0;
     let toAll = document.querySelector('.toAll');
-    console.log(toAll);
     for (let i = 0; i < total.length; i++) {
         total[i].textContent = `$${Number(price[i].textContent.split('$')[1] * sel[i].value)}`;
         totalAll += Number(total[i].textContent.split('$')[1]);
@@ -304,7 +303,7 @@ if (!isset($_SESSION['renCart'])) {
     //總金額
     toAll.textContent = `$${totalAll}`;
     //更換商品數量
-    function change() {
+    function change1() {
         qty = event.target.value;
         let f_qty = document.querySelector('#qty');
         let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
@@ -317,6 +316,10 @@ if (!isset($_SESSION['renCart'])) {
             })
             .then(r => r.json())
             .then(obj => console.log(obj));
+    changePrice1(qty)
+    }
+    function changePrice1(qty){
+        
     }
 
     // function change() {
@@ -331,7 +334,7 @@ if (!isset($_SESSION['renCart'])) {
     //     }
     //     toAll.textContent = `$${totalAll}`;
     // }
-    
+
     //刪除單筆商品
     function delete_it(event) {
         sid.value = event;
