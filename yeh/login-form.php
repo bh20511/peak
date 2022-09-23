@@ -1,7 +1,7 @@
 <?php require __DIR__ . '/parts/connect-db.php'; ?>
-<?php $pageName = "login"; 
+<?php $pageName = "login";
 
-if(!empty($_SESSION['admin'])){
+if (!empty($_SESSION['admin'])) {
     header('Location: ../yeh/members-list.php');
     exit;
 }
@@ -52,9 +52,13 @@ if(!empty($_SESSION['admin'])){
             alert("登入成功");
             // swal("登入成功!", "", "success");
             // location.href = 'members-list.php';
-            location.href = '<?= $_GET['from'] ?>';
+            if (<?= $_GET['from'] ?>) {
+                location.href = '<?= $_GET['from'] ?>';
+            } else {
+                location.href = 'members-list.php';
+            }
             // location.reload();
-            
+
         } else {
             alert(obj.error);
         }
@@ -69,6 +73,5 @@ if(!empty($_SESSION['admin'])){
             pass.type = "password";
         }
     }
-
 </script>
 <?php require __DIR__ . '/parts/html-foot.php'; ?>
