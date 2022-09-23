@@ -31,10 +31,10 @@ if (!empty($sid)) {
         }
     } else {
         // 刪除項目
-        unset($_SESSION['roomCart'][$sid]);
+        unset($_SESSION['rCart'][$sid]);
     }
 }
 
 
 
-echo json_encode($_SESSION['roomCart'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+echo json_encode($_SESSION['rCart'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);

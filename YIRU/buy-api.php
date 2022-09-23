@@ -46,10 +46,7 @@ $stmt->execute([
     $memberSid,
     $_SESSION['tPrice'],
 ]);
-//回傳結果
-// if ($stmt->rowCount()) {
-//     $output['success'] = true;
-// }
+
 
 //如果產品購物車不是空的 新增產品訂單
 if (!empty($_SESSION['cart'])) {
@@ -173,6 +170,11 @@ if (!empty($_SESSION['camCart'])) {
     }
 }
 
+//回傳結果
+if ($stmt->rowCount()) {
+    $output['success'] = true;
+}
 
 
-// echo json_encode($output, JSON_UNESCAPED_UNICODE);
+
+echo json_encode($output, JSON_UNESCAPED_UNICODE);

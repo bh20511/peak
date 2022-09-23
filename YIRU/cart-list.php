@@ -322,7 +322,7 @@ if (!isset($_SESSION['renCart'])) {
             .then(obj => {
                 changePrice(qty, money, moneyAll)
             });
-            test()
+        test()
     }
     //更換租借數量
     function change2() {
@@ -342,7 +342,7 @@ if (!isset($_SESSION['renCart'])) {
             .then(obj => {
                 changePrice(qty, money, moneyAll)
             });
-            test()
+        test()
     }
     //更換活動數量
     function change3() {
@@ -362,7 +362,7 @@ if (!isset($_SESSION['renCart'])) {
             .then(obj => {
                 changePrice(qty, money, moneyAll)
             });
-            test()
+        test()
     }
     //更換房間數量
     function change4() {
@@ -382,7 +382,7 @@ if (!isset($_SESSION['renCart'])) {
             .then(obj => {
                 changePrice(qty, money, moneyAll)
             });
-            test()
+        test()
     }
     //更換數量同時更換價錢
     function changePrice(a, b, c) {
@@ -531,18 +531,22 @@ if (!isset($_SESSION['renCart'])) {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '購買成功',
+                    showConfirmButton: false,
+                    timer: 1000,
+                });
                 fetch('buy-api.php', {
                         method: "POST",
                         body: fd
                     })
                     .then(r => r.text())
-                    .then(obj => console.log(obj));
-                Swal.fire(
-                    '已完成',
-                    '',
-                    'success',
-                )
-                fetch('clean-api.php');
+                    .then(obj => {
+                        if (obj.success) {
+                            fetch('clean-api.php');
+                        }
+                    });
                 setTimeout('location.href="order.php"', 800)
             }
         })
