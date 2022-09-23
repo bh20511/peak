@@ -40,23 +40,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'products' ? 'clicked' : ''  ?>" href="products.php">商品</a>
+                        <a class="nav-link <?= $pageName == 'products' ? 'clicked' : ''  ?>" href="../YIRU/products.php">商品</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'room' ? 'clicked' : '' ?>" href="room.php">訂房</a>
+                        <a class="nav-link <?= $pageName == 'room' ? 'clicked' : '' ?>" href="../YIRU/room.php">訂房</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'rental' ? 'clicked' : '' ?>" href="rental.php">租借</a>
+                        <a class="nav-link <?= $pageName == 'rental' ? 'clicked' : '' ?>" href="../YIRU/rental.php">租借</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'campaign' ? 'clicked' : '' ?>" href="campaign.php">活動</a>
+                        <a class="nav-link <?= $pageName == 'campaign' ? 'clicked' : '' ?>" href="../YIRU/campaign.php">活動</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'cart' ? 'clicked' : '' ?>" href="cart-list.php">購物車
+                        <a class="nav-link <?= $pageName == 'cart' ? 'clicked' : '' ?>" href="../YIRU/cart-list.php">購物車
                             <span class="badge"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= $pageName == 'order' ? 'clicked' : '' ?>" href="order.php">訂單</a>
+                        <a class="nav-link <?= $pageName == 'order' ? 'clicked' : '' ?>" href="../YIRU/order.php">訂單</a>
                     </li>
                     
                     <li class="nav-item">
