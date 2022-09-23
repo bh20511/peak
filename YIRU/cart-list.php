@@ -48,12 +48,13 @@ if (!isset($_SESSION['renCart'])) {
     }
 
     .form1 {
-        display: none;
+        /* display: none; */
     }
 </style>
 <form class="form1">
     <input type="text" name="sid" id="sid">
     <input type="text" name="tPrice" id="tPrice">
+    <input type="text" name="qty" id="qty">
 </form>
 <div class="container">
     <div class="row">
@@ -302,21 +303,35 @@ if (!isset($_SESSION['renCart'])) {
     }
     //總金額
     toAll.textContent = `$${totalAll}`;
-    //更換數量
-    let qty = 0
-
+    //更換商品數量
     function change() {
         qty = event.target.value;
-        money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
-        moneyAll = event.target.parentNode.parentNode.querySelector('.total');
-        moneyAll.textContent = Number(qty) * Number(money);
-        totalAll = 0;
-        for (let i = 0; i < total.length; i++) {
-            total[i].textContent = `$${Number(price[i].textContent.split('$')[1]) * Number(sel[i].value)}`;
-            totalAll += Number(total[i].textContent.split('$')[1]);
-        }
-        toAll.textContent = `$${totalAll}`;
+        let f_qty = document.querySelector('#qty');
+        let f_sid = event.target.parentNode.parentNode.getAttribute("data_sid");
+        f_qty.value = qty;
+        sid.value = f_sid;
+        let fd = new FormData(document.querySelector('.form1'));
+        fetch('cart-api/proQty.php', {
+                method: "POST",
+                body: fd
+            })
+            .then(r => r.json())
+            .then(obj => console.log(obj));
     }
+
+    // function change() {
+    //     qty = event.target.value;
+    //     money = event.target.parentNode.parentNode.querySelector('.price').textContent.split('$')[1];
+    //     moneyAll = event.target.parentNode.parentNode.querySelector('.total');
+    //     moneyAll.textContent = Number(qty) * Number(money);
+    //     totalAll = 0;
+    //     for (let i = 0; i < total.length; i++) {
+    //         total[i].textContent = `$${Number(price[i].textContent.split('$')[1]) * Number(sel[i].value)}`;
+    //         totalAll += Number(total[i].textContent.split('$')[1]);
+    //     }
+    //     toAll.textContent = `$${totalAll}`;
+    // }
+    
     //刪除單筆商品
     function delete_it(event) {
         sid.value = event;

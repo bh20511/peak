@@ -39,7 +39,7 @@ $rows = $pdo->query($sql)->fetchAll();
     }
 
     .form1 {
-        display: none;
+        /* display: none; */
     }
 
     .card-body {
