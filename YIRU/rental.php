@@ -1,25 +1,71 @@
 <?php require '../yeh/parts/connect-db.php';
 $pageName = 'rental';
 
+//---------------
 
 
-$sql = sprintf(
-    "SELECT * FROM `rental` ORDER BY `rental_product_sid` DESC"
-);
-// $rows = [];
-$rows = $pdo->query($sql)->fetchAll();
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+//查詢總共有幾筆
+$p_sql = "SELECT COUNT(1) FROM `rental`";
+// fetch(PDO::FETCH_NUM)[0]; //去掉欄位 .[0]只取值 得到有幾行的資料
+$totalrows = $pdo->query($p_sql)->fetch(PDO::FETCH_NUM)[0];
+// //每頁放4筆
+$perpage = 12;
+// //總共有幾頁 
+$totalpage = ceil($totalrows / $perpage);
+
+
+// 判斷資料是否有傳進來  >> 如果有再判斷頁數是否 小於1 or 大於總頁數，調整頁數上下限
+if ($totalrows) {
+    if ($page < 1) {
+        header('Location: ?page=1');
+        exit;
+    }
+    if ($page > $totalpage) {
+        header('Location: ?page=' . $totalpage);
+        exit;
+    }
+
+
+    //查詢資料 降冪排序 LIMIT 0,5 
+    $sql = sprintf(
+        "SELECT * FROM `rental` ORDER BY `rental_product_sid` DESC LIMIT %s,%s",
+        ($page - 1) * $perpage,
+        $perpage
+    );
+    // $rows = [];
+    $rows = $pdo->query($sql)->fetchAll();
+}
+
+$output = [
+    'totalrows' => $totalrows,
+    'totalrows' => $totalpage,
+    'page' => $page,
+    'row' => $rows,
+    'prepage' => $perpage,
+];
+
+
+//------------------
+
+// $sql = sprintf(
+//     "SELECT * FROM `rental` ORDER BY `rental_product_sid` DESC"
+// );
+// // $rows = [];
+// $rows = $pdo->query($sql)->fetchAll();
 
 
 ?>
-<?php include '../yeh/parts/html-head.php';?>
-<?php include '../yeh/parts/nav-m.php';?>
+<?php include '../yeh/parts/html-head.php'; ?>
+<?php include '../yeh/parts/nav-m.php'; ?>
 <style>
     .form-select {
         width: 30%;
         display: inline-block;
     }
-    .form1{
-        display:none;
+
+    .form1 {
+        display: none;
     }
 </style>
 <form class="form1">
@@ -28,7 +74,30 @@ $rows = $pdo->query($sql)->fetchAll();
 </form>
 <div class="container">
     <div class="row">
-    <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                <li class="page-item <?= 1 == $page ? 'disabled' : 0 ?>">
+                    <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <i class="fa-solid fa-caret-left"></i>
+                    </a>
+                </li>
+
+                <?php for ($i = 1; $i <= $totalpage; $i++) : ?>
+                    <li class="page-item <?= $i == $page ? 'active' : 0 ?>">
+                        <a class="page-link" href=" ?page=<?= $i ?>"><?= $i ?></a>
+                    </li>
+                <?php endfor; ?>
+
+                <li class="page-item <?= $totalpage == $page ? 'disabled' : 0 ?>">
+                    <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <i class="fa-solid fa-caret-right"></i>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
                     <a class="page-link" href="#">
@@ -44,7 +113,7 @@ $rows = $pdo->query($sql)->fetchAll();
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav> -->
         <?php foreach ($rows as $r) : ?>
             <div class="card" style="width: 18rem;">
                 <img src="../bert/rental/<?= $r['rental_img'] ?>" class="card-img-top" alt="...">
@@ -68,7 +137,7 @@ $rows = $pdo->query($sql)->fetchAll();
         <?php endforeach ?>
     </div>
 </div>
-<?php include '../yeh/parts/scripts.php';?>
+<?php include '../yeh/parts/scripts.php'; ?>
 <script>
     function addToCar(event) {
         let btnE = event.currentTarget;
@@ -86,11 +155,10 @@ $rows = $pdo->query($sql)->fetchAll();
                 body: fd
             })
             .then(r => r.json())
-            .then(function(data){
+            .then(function(data) {
                 count(data)
                 console.log(data)
-            }
-            )
+            })
         Swal.fire({
             icon: 'success',
             title: '已加入購物車',
@@ -102,4 +170,4 @@ $rows = $pdo->query($sql)->fetchAll();
 </script>
 
 
-<?php include '../yeh/parts/html-foot.php';?>
+<?php include '../yeh/parts/html-foot.php'; ?>
