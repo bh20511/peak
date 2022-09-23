@@ -4,7 +4,7 @@ require '../yeh/parts/connect-db.php';
 
 $perPage = 15; //固定一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$pageName = 'list';
+$pageName = 'room_list';
 
 //算資料的總筆數
 

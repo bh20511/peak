@@ -5,6 +5,14 @@
         color: white;
         font-weight: 800;
     }
+        
+    .navbar-nav .nav-item .nav-link.active {
+        border-radius: 5px;
+        background-color: #0d6efd;
+        color: white;
+        font-weight: 800;
+    }
+
     /* highlight目前active頁面的CSS */
     .previewbox {
         margin: auto;

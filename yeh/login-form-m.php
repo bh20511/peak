@@ -18,13 +18,13 @@ if(!empty($_SESSION['member'])){
                     <form name="loginForm" onsubmit="checkForm(); return false;">
                         <div class="mb-3">
                             <label for="account" class="form-label">請輸入電子信箱</label>
-                            <p>test@test.com</p>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <!-- <p>test@test.com</p> -->
+                            <input type="text" class="form-control" id="email" name="email" value="test@test.com">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">請輸入密碼</label>
-                            <p>123456ABCabc*</p>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <!-- <p>123456ABCabc*</p> -->
+                            <input type="password" class="form-control" id="password" name="password" value="123456ABCabc*">
                             <input type="checkbox" name="showpass" id="showpass" onclick="showPw()">
                             <label for="showpass">顯示密碼</label>
                         </div>
