@@ -78,20 +78,18 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
 
 <!-- ---------------------- -->
-<div class="container">
+<div class="container" style="margin-top: 20px;">
     <div class="row">
         <div class="col">
             <?php foreach ($order_stmt as $o) : ?>
-
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
-
+                            <i class="fa-solid fa-trash-can"></i>
                                 <div> 會員編號 :<?= $o['member_sid'] ?></div>
                                 <div> 訂單編號 <?= $o['order_num'] ?></div>
                                 <div>金額 :<?= $o['total'] ?></div>
-
                             </button>
                         </h2>
 
@@ -124,6 +122,12 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body room">
                                         訂房資訊： <?= $q['room_name'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        入住時間： <?= $q['start'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        退房時間： <?= $q['end'] ?>
                                     </div>
                                     <div class="accordion-body room">
                                         人數： <?= $q['qty'] ?>
