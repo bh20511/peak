@@ -6,7 +6,7 @@
         font-weight: 800;
     }
         
-    nav.navbar .nav-link.active {
+    .navbar-nav .nav-item .nav-link.active {
         border-radius: 5px;
         background-color: #0d6efd;
         color: white;
