@@ -1,9 +1,12 @@
 <?php
-if(! isset($_SESSIONS)){
+if (!isset($_SESSIONS)) {
     session_start();
 }
 
-if(empty($_SESSION['admin'])){
-    header('Location: ../yeh/login-form.php');
-    exit;
+$from = $_SERVER['REQUEST_URI'];
+
+if (empty($_SESSION['admin'])) {
+    header("Location: ../yeh/login-form.php?from=$from");
+ exit;
+ 
 }
