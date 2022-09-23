@@ -52,14 +52,14 @@ if ($totalRows) {
                 </li>
                 <!-- 用for生成pagination並設定連結 -->
                 <!-- 避免頁碼連結過多 最常只取前5頁~後5頁 -->
-                <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
-                    if ($i >= 1 and $i <= $totalPages) :
+                <?php $j = $page; for ($i = $j - 5; $i <= $j + 5; $i++) :
+                    if ($i >= 1 and $i <= $totalPages) {
                 ?>
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
                             <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                         </li>
                 <?php
-                    endif;
+                    } else { $j++; }
                 endfor; ?>
                 <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
                     <a class="page-link" href="?page=<?= $page + 1 ?>">
