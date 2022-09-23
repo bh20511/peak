@@ -1,29 +1,30 @@
 <?php require '../yeh/parts/connect-db.php';
 
 $pageName = 'order';
-
-$order = "SELECT * FROM `order`";
+$m_s = $_SESSION['member']['member_sid'];
+$order = "SELECT * FROM `order` WHERE member_sid = $m_s ";
 $order_stmt = $pdo->query($order)->fetchAll();
 
 //商品
 $sql = "SELECT * FROM `order`join `product_order` on order.order_num = product_order.order_num 
-join product on product_order.products_sid= product.product_sid";
+join product on product_order.products_sid= product.product_sid where order.member_sid=$m_s";
 $product_order_product = $pdo->query($sql)->fetchAll();
 
 //訂房
 $sql2 = "SELECT * FROM `order`join `booking_order` on order.order_num = booking_order.order_num 
-join room on booking_order.room_sid= room.room_sid";
+join room on booking_order.room_sid= room.room_sid where order.member_sid=$m_s";
 $product_order_room = $pdo->query($sql2)->fetchAll();
+
 
 
 //租借
 $sql3 = "SELECT * FROM `order`join `rental_order` on order.order_num = rental_order.order_num 
-join rental on rental_order.rental_sid= rental.rental_product_sid";
+join rental on rental_order.rental_sid= rental.rental_product_sid where order.member_sid=$m_s";
 $product_order_retal = $pdo->query($sql3)->fetchAll();
 
 //活動
 $sql4 = "SELECT * FROM `order`join `campaign_order` on order.order_num = campaign_order.order_num 
-join campaign on campaign_order.campaign_sid= campaign.sid";
+join campaign on campaign_order.campaign_sid= campaign.sid where order.member_sid=$m_s";
 $product_order_camp = $pdo->query($sql4)->fetchAll();
 
 
@@ -73,52 +74,16 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 <?php include '../yeh/parts/nav-m.php'; ?>
 
 
-<div class="container">
-    <div class="row">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">訂單編號</th>
-                    <th scope="col">金額</th>
-                    <th scope="col">詳細訂單</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($order_stmt as $o) : ?>
-                    <tr>
-                        <td><?= $o['order_num'] ?></td>
-                        <td><?= $o['total'] ?></td>
-                        <td><button id="btn" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                檢視訂單
-                            </button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
 <!-- ---------------------- -->
 <div class="container">
     <div class="row">
         <div class="col">
-
-
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">訂單編號</th>
-                        <th scope="col">金額</th>
-                    </tr>
-                </thead>
-            </table>
             <?php foreach ($order_stmt as $o) : ?>
 
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
 
                                 <div> 訂單編號 :<?= $o['order_num'] ?></div>
                                 <div>金額 :<?= $o['total'] ?></div>
@@ -127,7 +92,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                         </h2>
 
 
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 
 
 

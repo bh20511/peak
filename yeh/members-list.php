@@ -117,7 +117,7 @@ if ($totalRows) {
                             <!-- <td><?= $r['member_level'] ?></td>
                         <td><?= $r['total_height'] ?></td> -->
                             <td>
-                                <?php if(!empty($r['avatar'])) : ?>
+                                <?php if (!empty($r['avatar'])) : ?>
                                     <div class="previewbox">
                                         <img id="preview2" src="./avatars/<?= $r['avatar'] ?>" alt="">
                                     </div>
