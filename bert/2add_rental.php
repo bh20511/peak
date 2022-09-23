@@ -35,11 +35,7 @@ $rows2 = $pdo->query($sql2)->fetchAll();
                         <label for="sid">商品種類</label>
                         <select name="sid" id="sid">
                             <?php foreach ($rows as $r) : ?>
-<<<<<<< HEAD
                                 <option value="<?= $r['product_category_sid'] ?>">
-=======
-                                <option value="<?= $r['product_category'] ?>">
->>>>>>> fdb3b1ade2893023935d6e716a61d3aa31a0b8f2
                                     <?= $r['product_category'] ?>
                                 </option>
                             <?php endforeach; ?>
@@ -95,11 +91,7 @@ $rows2 = $pdo->query($sql2)->fetchAll();
                 alert("新增完成");
                 location.href = "2add_rental.php";
             } else {
-<<<<<<< HEAD
-                alert("新增失敗,請檢查照片或輸入資料格式");
-=======
                 alert("新增失敗,請檢查必要資訊");
->>>>>>> fdb3b1ade2893023935d6e716a61d3aa31a0b8f2
             }
         })
     }

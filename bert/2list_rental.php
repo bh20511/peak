@@ -61,9 +61,11 @@ $output = [
             <input type="text" name="money" id="hey" style="width:75px;">
             <button type="button" id="btn2" onclick="test2()">篩選</button>
         </form>
-
+        
         <div class="col" style="display:flex; justify-content:space-between;">
-            <nav aria-label="Page navigation example">
+        
+           
+        <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
@@ -88,7 +90,7 @@ $output = [
                     </li>
                 </ul>
             </nav>
-            <button id="insert" type="button" class="btn btn-primary">新增租借商品</button>
+            <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
         </div>
     </div>
 
@@ -158,11 +160,11 @@ $output = [
 
 
 
-    const insert = document.querySelector("#insert");
-    insert.addEventListener("click", event => {
+    const insertx = document.querySelector("#insertx");
+    insertx.addEventListener("click", event => {
         console.log("a");
         location.href = '2add_rental.php';
-    })
+    });
 
 
 
