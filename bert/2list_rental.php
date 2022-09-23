@@ -51,9 +51,10 @@ $output = [
 ?>
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php include '../yeh/parts/nav.php'; ?>
+
 <div class="container">
     <div class="row">
-        <div class="col">
+        <div class="col" style="display:flex; justify-content:space-between;">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
@@ -79,6 +80,7 @@ $output = [
                     </li>
                 </ul>
             </nav>
+            <button id="insert" type="button" class="btn btn-primary">新增租借商品</button>
         </div>
     </div>
 
