@@ -557,12 +557,8 @@ if (!isset($_SESSION['renCart'])) {
                         body: fd
                     })
                     .then(r => r.text())
-                    .then(obj => {
-                        if (obj.success) {
-                            fetch('clean-api.php');
-                        }
-                    });
-                setTimeout('location.href="order.php"', 800)
+                    .then(obj => console.log(obj));
+                setTimeout('location.href="order.php"', 900)
             }
         })
     }
