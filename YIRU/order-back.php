@@ -97,6 +97,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <div class="qq"> 會員編號 :<?= $o['member_sid'] ?></div>
                                 <div class="qq"> 訂單編號 <?= $o['order_num'] ?></div>
                                 <div class="qq">金額 :<?= $o['total'] ?></div>
+                                <div class="qq">訂單日期 :<?= $o['created_time'] ?></div>
                             </button>
                         </h2>
                         <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
