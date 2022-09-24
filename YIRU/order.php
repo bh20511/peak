@@ -1,6 +1,7 @@
 <?php require '../yeh/parts/connect-db.php';
 
 $pageName = 'order';
+
 $m_s = $_SESSION['member']['member_sid'];
 $order = "SELECT * FROM `order` WHERE member_sid = $m_s ";
 $order_stmt = $pdo->query($order)->fetchAll();
@@ -39,13 +40,12 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
     .accordion-button div {
         width: 50%;
-
-
+        /* color:red; */
+        font-weight: 900;
     }
 
     div.accordion-body.product {
         background-color: #F3BF88;
-
     }
 
     div.accordion-body.room {
@@ -63,38 +63,41 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
     }
 
-    /* #collapseOne {
-        display: flex;
+    .accordion-he {
+        border: 1px solid black;
+        padding: 15px;
+        border-radius: 10px;
+        /* background-color: #91B493; */
+        /* background-color: #c89b40; */
+        background-color: #eedeb0;
+        font-weight: 600;
     }
-
-    #collapseOne div {
-        width: 33.333%;
-    } */
+    .col{
+        padding: 0 120px;
+    }
+    .ero{
+        margin-top: 20px;
+    }
+    
 </style>
 <?php include '../yeh/parts/nav-m.php'; ?>
 
 
 <!-- ---------------------- -->
-<div class="container">
+<div class="container ero">
     <div class="row">
         <div class="col">
             <?php foreach ($order_stmt as $o) : ?>
-
-                <div class="accordion" id="accordionExample">
+                <div class="accordio" id="accordionExample">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
-
+                        <h2 class="accordion-he" id="headingOne">
+                            <button class="accordion-button" type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
                                 <div> 訂單編號 :<?= $o['order_num'] ?></div>
                                 <div>金額 :<?= $o['total'] ?></div>
-
+                                <div>訂單日期 :<?= $o['created_time'] ?></div>
                             </button>
                         </h2>
-
-
                         <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-
-
 
                             <!-- -------------------------產品-------------------------- -->
                             <?php foreach ($product_order_product as $q) : ?>

@@ -36,7 +36,6 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 <style>
     .accordion-button {
         display: flex;
-
     }
 
     .accordion-button div {
@@ -63,11 +62,6 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
         background-color: lightgreen;
 
     }
-
-    /* div.accordio{
-        border: 1px solid black;
-        padding: 15px;
-    } */
     .accordion-h {
         border: 1px solid black;
         padding: 15px;
@@ -105,11 +99,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <div class="qq">金額 :<?= $o['total'] ?></div>
                             </button>
                         </h2>
-
-
                         <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-
-
 
                             <!-- -------------------------產品-------------------------- -->
                             <?php foreach ($product_order_product as $q) : ?>
@@ -123,14 +113,10 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body product">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
-
-
                             <!-- -------------------------訂房-------------------------- -->
-
                             <?php foreach ($product_order_room as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body room">
@@ -148,15 +134,10 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body room">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
-
-
-
                             <!-- --------------------------租借------------------------- -->
-
                             <?php foreach ($product_order_retal as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body rental">
@@ -168,12 +149,10 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body rental">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
                             <!-- --------------------------活動------------------------- -->
-
                             <?php foreach ($product_order_camp as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body camp">
@@ -185,15 +164,9 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body camp">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
-
-
-
                         </div>
-
-
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -28,11 +28,15 @@
         color: #2A52BE;
         padding: 10px;
     }
+    .bg{
+        background-color: #eeeeee;
+        border-radius: 0 0 20px 20px;
+    }
 </style>
 
 <body>
     <div class="container">
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg  bg">
             <div class="container-fluid">
                 <a href="../yeh/login-form.php" style="text-decoration: none;">
                     <h1 class="logo">爬山趣</h1>

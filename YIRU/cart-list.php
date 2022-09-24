@@ -168,7 +168,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <i class="fa-solid fa-trash-can"></i>
                             </th>
                             <th scope="col">封面</th>
-                            <th scope="col">商品名稱</th>
+                            <th scope="col">活動名稱</th>
                             <th scope="col">單價</th>
                             <th scope="col">數量</th>
                             <th scope="col">金額</th>
