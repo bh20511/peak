@@ -99,7 +99,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 <div class="container" style="margin-top: 20px;">
     <div class="row">
         <div class="col">
-            <form class="product">
+            <form class="product" style="display:none ;">
                 <input type="text" name="num" id="nump">
                 <input type="text" name="qty" id="qty">
             </form>
