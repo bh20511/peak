@@ -61,7 +61,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?= $pageName == 'cart' ? 'clicked' : '' ?>" href="../YIRU/cart-list.php">購物車
-                                <span class="badge"></span></a>
+                                <span class="badg"></span></a>
                         </li>
                         <?php if (empty($_SESSION['member'])) : ?>
                             <li class="nav-item">
