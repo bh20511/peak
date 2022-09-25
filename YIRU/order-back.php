@@ -99,6 +99,10 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 <div class="container" style="margin-top: 20px;">
     <div class="row">
         <div class="col">
+            <form class="product">
+                <input type="text" name="num" id="nump">
+                <input type="text" name="qty" id="qty">
+            </form>
             <?php foreach ($order_stmt as $o) : ?>
                 <div class="accordio" id="accordionExample">
                     <div class="accordion-item">
@@ -114,13 +118,14 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                         <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 
                             <!-- -------------------------產品-------------------------- -->
+
                             <?php foreach ($product_order_product as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body  product">
                                         商品： <?= $q['product_name'] ?>
                                     </div>
-                                    <div class="accordion-body product">
-                                        數量： <?= $q['qty'] ?>
+                                    <div class="accordion-body product p_qty">
+                                        數量： <span><?= $q['qty'] ?></span>
                                     </div>
                                     <div class="accordion-body product">
                                         總計金額 ：<?= $q['total']  ?>
@@ -130,12 +135,15 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                             <?php foreach ($product_order_product as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body product right-div product">
-                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                        <button type="button" class="btn btn-dark right" onclick="edit1()" num="<?= $q['order_num'] ?>">編輯</button>
                                     </div>
                                     <?php break; ?>
                                 <?php endif ?>
                             <?php endforeach; ?>
+
+
                             <!-- -------------------------訂房-------------------------- -->
+
                             <?php foreach ($product_order_room as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body room">
@@ -147,8 +155,8 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body room">
                                         退房時間： <?= $q['end'] ?>
                                     </div>
-                                    <div class="accordion-body room">
-                                        人數： <?= $q['qty'] ?>
+                                    <div class="accordion-body room room_qty">
+                                        人數： <span><?= $q['qty'] ?></span>
                                     </div>
                                     <div class="accordion-body room">
                                         總計金額 ：<?= $q['total']  ?>
@@ -158,19 +166,20 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                             <?php foreach ($product_order_room as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body product right-div room">
-                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                        <button type="button" class="btn btn-dark right" onclick="edit2()" num="<?= $q['order_num'] ?>">編輯</button>
                                     </div>
                                     <?php break; ?>
                                 <?php endif ?>
                             <?php endforeach; ?>
+
                             <!-- --------------------------租借------------------------- -->
                             <?php foreach ($product_order_retal as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body rental">
                                         租借商品： <?= $q['rental_product_name'] ?>
                                     </div>
-                                    <div class="accordion-body rental">
-                                        數量： <?= $q['qty'] ?>
+                                    <div class="accordion-body rental ren_qty">
+                                        數量： <span><?= $q['qty'] ?></span>
                                     </div>
                                     <div class="accordion-body rental">
                                         總計金額 ：<?= $q['total']  ?>
@@ -180,7 +189,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                             <?php foreach ($product_order_retal as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body product right-div rental">
-                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                        <button type="button" class="btn btn-dark right" onclick="edit3()" num="<?= $q['order_num'] ?>">編輯</button>
                                     </div>
                                     <?php break; ?>
                                 <?php endif; ?>
@@ -193,19 +202,8 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                         活動資訊： <?= $q['name'] ?>
                                     </div>
                                     <div class="accordion-body camp">
-                                        數量： <?= $q['qty'] ?>
-                                    </div>
-                                    <div class="accordion-body camp">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                            <?php foreach ($product_order_camp as $q) : ?>
-                                <?php if ($o['order_num'] == $q['order_num']) : ?>
-                                    <div class="accordion-body product right-div camp">
-                                        <button type="button" class="btn btn-dark right">編輯</button>
-                                    </div>
-                                    <?php break; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
@@ -244,7 +242,127 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
         })
     }
 
+    //編輯商品子訂單
+    function edit1() {
+        let qty = event.target.parentNode.parentNode.querySelectorAll('.p_qty');
+        let btn = event.target;
+        //改變文字
+        if (btn.textContent.indexOf('編輯') != -1) {
+            btn.textContent = '完成編輯';
+        }
+        //改變onclick屬性
+        btn.setAttribute('onclick', 'edit1_1()');
+        for (let i = 0; i < qty.length; i++) {
+            // console.log(qty[i].querySelector('span').textContent);
+            let a = qty[i].querySelector('span').textContent;
+            qty[i].innerHTML = `數量: <input type="text" value="${a}">`
+        }
+    }
+    //送出商品編輯資料
+    function edit1_1() {
+        let nump = document.querySelector('#nump');
+        let qty = document.querySelector('#qty')
+        nump.value = event.target.getAttribute('num');
+        qty.value = event.target.parentNode.parentNode.querySelector('.p_qty').querySelector('input').value
+        console.log(event.target);
+        let fd = new FormData(document.querySelector('.product'));
+        fetch('edit-1-api.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(r => r.text())
+            .then(obj => {
+                console.log(obj)
+            })
+        Swal.fire({
+            icon: 'success',
+            title: '已完成修改',
+            showConfirmButton: false,
+            timer: 1000,
+        });
+        setTimeout('location.href="order-back.php"', 900)
+    }
+    //編輯房間子訂單
+    function edit2() {
+        let qty = event.target.parentNode.parentNode.querySelectorAll('.room_qty');
+        let btn = event.target;
+        //改變文字
+        if (btn.textContent.indexOf('編輯') != -1) {
+            btn.textContent = '完成編輯';
+        }
+        //改變onclick屬性
+        btn.setAttribute('onclick', 'edit2_2()');
+        for (let i = 0; i < qty.length; i++) {
+            // console.log(qty[i]);
+            let a = qty[i].querySelector('span').textContent;
+            qty[i].innerHTML = `數量: <input type="text" value="${a}">`
+        }
+    }
+    //送出房間編輯資料
+    function edit2_2(){
+        let nump = document.querySelector('#nump');
+        let qty = document.querySelector('#qty')
+        nump.value = event.target.getAttribute('num');
+        qty.value = event.target.parentNode.parentNode.querySelector('.room_qty').querySelector('input').value
+        console.log(event.target);
+        let fd = new FormData(document.querySelector('.product'));
+        fetch('edit-2-api.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(r => r.text())
+            .then(obj => {
+                console.log(obj)
+            })
+        Swal.fire({
+            icon: 'success',
+            title: '已完成修改',
+            showConfirmButton: false,
+            timer: 1000,
+        });
+        setTimeout('location.href="order-back.php"', 900)
+    }
 
-    
+    //編輯租借子訂單
+    function edit3() {
+        let qty = event.target.parentNode.parentNode.querySelectorAll('.ren_qty');
+        let btn = event.target;
+        //改變文字
+        if (btn.textContent.indexOf('編輯') != -1) {
+            btn.textContent = '完成編輯';
+        }
+        //改變onclick屬性
+        btn.setAttribute('onclick', 'edit3_3()');
+        for (let i = 0; i < qty.length; i++) {
+            // console.log(qty[i]);
+            let a = qty[i].querySelector('span').textContent;
+            qty[i].innerHTML = `數量: <input type="text" value="${a}">`
+        }
+    }
+    //送出租借編輯資料
+    function edit3_3(){
+        let nump = document.querySelector('#nump');
+        let qty = document.querySelector('#qty')
+        nump.value = event.target.getAttribute('num');
+        qty.value = event.target.parentNode.parentNode.querySelector('.ren_qty').querySelector('input').value
+        console.log(event.target);
+        let fd = new FormData(document.querySelector('.product'));
+        fetch('edit-3-api.php', {
+                method: 'POST',
+                body: fd
+            })
+            .then(r => r.text())
+            .then(obj => {
+                console.log(obj)
+            })
+        Swal.fire({
+            icon: 'success',
+            title: '已完成修改',
+            showConfirmButton: false,
+            timer: 1000,
+        });
+        setTimeout('location.href="order-back.php"', 900)
+    }
+
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
