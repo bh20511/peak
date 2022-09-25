@@ -31,7 +31,7 @@ if ($totalRows) {
     }
 
     $sql = sprintf(
-        "SELECT * FROM campaign  ORDER BY sid  LIMIT %s, %s",
+        "SELECT * FROM campaign  ORDER BY sid DESC  LIMIT %s, %s",
         ($page - 1) * $perpage,
         $perpage
     ); // 索引值0, 開始取perpage比數的資料
