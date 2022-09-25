@@ -4,7 +4,7 @@ require '../yeh/parts/connect-db.php';
 
 $pageName = 'order-back-list';
 
-$order = "SELECT * FROM `order`";
+$order = "SELECT * FROM `order` ORDER BY `sid` DESC";
 $order_stmt = $pdo->query($order)->fetchAll();
 
 //商品
@@ -16,6 +16,7 @@ $product_order_product = $pdo->query($sql)->fetchAll();
 $sql2 = "SELECT * FROM `order`join `booking_order` on order.order_num = booking_order.order_num 
 join room on booking_order.room_sid= room.room_sid";
 $product_order_room = $pdo->query($sql2)->fetchAll();
+
 
 
 //租借
@@ -62,6 +63,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
         background-color: lightgreen;
 
     }
+
     .accordion-h {
         border: 1px solid black;
         padding: 15px;
@@ -77,6 +79,15 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
     .fa-trash-can {
         color: #F7C242;
         margin-right: 10px;
+    }
+
+    .right {
+        margin-right: 20px;
+    }
+
+    .right-div {
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
 <?php include '../yeh/parts/nav.php'; ?>
@@ -116,7 +127,14 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-
+                            <?php foreach ($product_order_product as $q) : ?>
+                                <?php if ($o['order_num'] == $q['order_num']) : ?>
+                                    <div class="accordion-body product right-div product">
+                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                    </div>
+                                    <?php break; ?>
+                                <?php endif ?>
+                            <?php endforeach; ?>
                             <!-- -------------------------訂房-------------------------- -->
                             <?php foreach ($product_order_room as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
@@ -137,7 +155,14 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-
+                            <?php foreach ($product_order_room as $q) : ?>
+                                <?php if ($o['order_num'] == $q['order_num']) : ?>
+                                    <div class="accordion-body product right-div room">
+                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                    </div>
+                                    <?php break; ?>
+                                <?php endif ?>
+                            <?php endforeach; ?>
                             <!-- --------------------------租借------------------------- -->
                             <?php foreach ($product_order_retal as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
@@ -150,6 +175,14 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body rental">
                                         總計金額 ：<?= $q['total']  ?>
                                     </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            <?php foreach ($product_order_retal as $q) : ?>
+                                <?php if ($o['order_num'] == $q['order_num']) : ?>
+                                    <div class="accordion-body product right-div rental">
+                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                    </div>
+                                    <?php break; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
 
@@ -167,6 +200,14 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                            <?php foreach ($product_order_camp as $q) : ?>
+                                <?php if ($o['order_num'] == $q['order_num']) : ?>
+                                    <div class="accordion-body product right-div camp">
+                                        <button type="button" class="btn btn-dark right">編輯</button>
+                                    </div>
+                                    <?php break; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -180,6 +221,7 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
 <?php include '../yeh/parts/scripts.php'; ?>
 <script>
+    //刪除母訂單
     function delete_it(num) {
         Swal.fire({
             title: `確定要刪除編號${num}嗎?`,
@@ -201,5 +243,8 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
         })
     }
+
+
+    
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>

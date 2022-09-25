@@ -3,7 +3,7 @@
 $pageName = 'order';
 
 $m_s = $_SESSION['member']['member_sid'];
-$order = "SELECT * FROM `order` WHERE member_sid = $m_s ";
+$order = "SELECT * FROM `order` WHERE member_sid = $m_s ORDER BY `sid` DESC";
 $order_stmt = $pdo->query($order)->fetchAll();
 
 //商品
