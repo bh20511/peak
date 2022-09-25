@@ -124,6 +124,9 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body  product">
                                         商品： <?= $q['product_name'] ?>
                                     </div>
+                                    <div class="accordion-body product">
+                                        單價： <?= $q['product_price'] ?>
+                                    </div>
                                     <div class="accordion-body product p_qty">
                                         數量： <span><?= $q['qty'] ?></span>
                                     </div>
@@ -155,6 +158,9 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                     <div class="accordion-body room">
                                         退房時間： <?= $q['end'] ?>
                                     </div>
+                                    <div class="accordion-body room">
+                                        單價： <?= $q['room_price'] ?>
+                                    </div>
                                     <div class="accordion-body room room_qty">
                                         人數： <span><?= $q['qty'] ?></span>
                                     </div>
@@ -177,6 +183,9 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body rental">
                                         租借商品： <?= $q['rental_product_name'] ?>
+                                    </div>
+                                    <div class="accordion-body rental">
+                                        單價： <?= $q['rental_price'] ?>
                                     </div>
                                     <div class="accordion-body rental ren_qty">
                                         數量： <span><?= $q['qty'] ?></span>
