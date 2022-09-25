@@ -53,6 +53,13 @@ $output = [
 
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php include '../yeh/parts/nav.php'; ?>
+<style>
+    #form3{
+        position: absolute;
+        top: 60px;
+        left: 50%;
+    }
+</style>
 
 <div class="container">
     <div class="row">
@@ -175,11 +182,11 @@ $output = [
 <script>
     function test2() {
         let money = document.querySelector("#hey").value;
-        if(money==""){
+        if (money == "") {
             location.href = '2list_rental.php?'
         };
         let compare = document.querySelector("#compare").value;
-        location.href = '3listtest.php?money=' + money+'&compare='+compare;
+        location.href = '3listtest.php?money=' + money + '&compare=' + compare;
     };
 
 
@@ -190,9 +197,9 @@ $output = [
 
     function test4() {
         let pname = document.querySelector("#autocomplete").value;
-        location.href = '2search.php?pname='+pname;
+        location.href = '2search.php?pname=' + pname;
     };
-    
+
     const analybtn = document.querySelector("#analy");
     analybtn.addEventListener("click", event => {
         location.href = '3analy_rental.php';
@@ -217,49 +224,52 @@ $output = [
     }
 
 
-    const inputText =  document.querySelector("#autocomplete");
+    const inputText = document.querySelector("#autocomplete");
     const listData = document.querySelector(".list-group");
     inputText.addEventListener("input", event => {
         let keyword = event.target.value;
-        while(listData.hasChildNodes()){
-            listData.removeChild(listData.lastChild);
+        if(keyword==""){
+            while (listData.hasChildNodes()) {
+                listData.removeChild(listData.lastChild);
+            }
         }
+        if (keyword !== "") {
+            while (listData.hasChildNodes()) {
+                listData.removeChild(listData.lastChild);
+            }
 
-        fetch('3show_api.php').
-        then(r => r.json()).
-        then(obj => {
-            let Datas = obj.product_name;
+            fetch('3show_api.php').
+            then(r => r.json()).
+            then(obj => {
+                let Datas = obj.product_name;
 
 
 
-    
-            let results = Datas.filter(function(element, index, arr){ 
-                return element.indexOf(keyword) !==-1; 
-            }); 
 
-            let docFrag = document.createDocumentFragment();
-            results.forEach(result=>{
-                let btn = document.createElement("button");
-                btn.setAttribute("type","button");
-                btn.classList.add("list-group-item","list-group-item-action");
-                let txtBtn = document.createTextNode(result);
-                btn.appendChild(txtBtn);
-                btn.addEventListener("click",event=>{
-                    inputText.value = event.target.textContent  
-                    while(listData.hasChildNodes()){
-                        listData.removeChild(listData.lastChild);
-                    }
+                let results = Datas.filter(function(element, index, arr) {
+                    return element.indexOf(keyword) !== -1;
                 });
-                docFrag.appendChild(btn);
-            })
-            listData.appendChild(docFrag);
-            
-        });
 
+                let docFrag = document.createDocumentFragment();
+                results.forEach(result => {
+                    let btn = document.createElement("button");
+                    btn.setAttribute("type", "button");
+                    btn.classList.add("list-group-item", "list-group-item-action");
+                    let txtBtn = document.createTextNode(result);
+                    btn.appendChild(txtBtn);
+                    btn.addEventListener("click", event => {
+                        inputText.value = event.target.textContent
+                        while (listData.hasChildNodes()) {
+                            listData.removeChild(listData.lastChild);
+                        }
+                    });
+                    docFrag.appendChild(btn);
+                })
+                listData.appendChild(docFrag);
 
+            });
+
+        }
     });
-
-
-    
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
