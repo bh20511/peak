@@ -101,15 +101,6 @@ $output = [
                 </ul>
             </nav>
             <div>
-            <div>
-                    <input type="text" class="from-control mb-3" id="autocomplete">
-                    <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action active">A</button>
-                        <button type="button" class="list-group-item list-group-item-action">B</button>
-                        <button type="button" class="list-group-item list-group-item-action">c</button>
-                        <button type="button" class="list-group-item list-group-item-action" disable>disable</button>
-                    </div>
-                </div>
                 <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
                 <button id="analy" type="button" class="btn btn-primary">租借商品分析</button>
             </div>
