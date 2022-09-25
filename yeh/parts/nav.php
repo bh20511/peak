@@ -2,7 +2,7 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand">管理後台</a>
+                <a class="navbar-brand" href="../yeh/login-form-m.php">管理後台</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -22,6 +22,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?= $pageName == 'camp_list' ? 'active' : ''  ?>" href="../N7/camp_list.php">活動</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?= $pageName == 'order-back-list' ? 'active' : ''  ?>" href="../YIRU/order-back.php">訂單</a>
                         </li>
                         <!-- <li class="nav-item">
                         <a class="nav-link" href="#">訂單</a>

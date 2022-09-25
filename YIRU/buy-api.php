@@ -170,11 +170,14 @@ if (!empty($_SESSION['camCart'])) {
     }
 }
 
-//回傳結果
-if ($stmt->rowCount()) {
-    $output['success'] = true;
+unset($_SESSION['cart'],$_SESSION['rCart'],$_SESSION['tPrice'],$_SESSION['renCart'],$_SESSION['camCart']);
+
+if(! isset($_SESSION['cart'])){
+    $_SESSION['cart'] = [];
+    $_SESSION['rCart'] = [];
+    $_SESSION['renCart'] =[];
+    $_SESSION['camCart'] =[];
+    $_SESSION['tPrice'] =[];
 }
-
-
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

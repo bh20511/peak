@@ -13,11 +13,11 @@ $extMap = [
 $output = [
     'success' => false,
     'error' => '',
-    'data' => [],
+    'data' => $_POST,
     'files' => $_FILES, // 除錯用
 ];
 
-if(empty($_FILES['single'])){
+if(empty($_FILES['single']['name'])){
     $output['error'] = '沒有上傳檔案';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;

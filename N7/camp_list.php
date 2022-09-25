@@ -79,7 +79,7 @@ $output = [
                     <?php for ($i = $page - 5; $i <=  $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
                     ?>
-                            <li class="page-item">
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
                                 <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                             </li>
                     <?php
