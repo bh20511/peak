@@ -5,19 +5,98 @@ $pageName = 'rental_list';
 $perPage = 20; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-$sql = sprintf(
-    "SELECT * FROM rental  
-        JOIN product_category 
-        ON rental.product_category_sid=product_category.product_category_sid 
-        JOIN brand
-        ON brand.brand_sid= rental.brand_sid
+if($_GET['money']==""){
+    header('Location: 2list_rental.php');
+}
+
+
+// 算總筆數
+if(isset($_GET['compare'])){
+    if($_GET['compare']=="bigger"){
+        $t_sql = sprintf(
+        "SELECT COUNT(1) FROM rental 
         WHERE rental_price > %s
         ORDER BY rental_product_sid",
-    $_GET['money']
-);
+        $_GET['money']
+        );
+        $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+        $totalPages = ceil($totalRows / $perPage);
+
+        $rows = [];
+        // 如果有資料
+        if ($totalRows) {
+            if ($page < 1) {
+            header('Location: ?page=1');
+            exit;
+            };
+            if ($page > $totalPages) {
+            header('Location: ?page=' . $totalPages);
+            exit;
+            };
+
+            $sql = sprintf(
+                "SELECT * FROM rental  
+                JOIN product_category 
+                ON rental.product_category_sid=product_category.product_category_sid 
+                JOIN brand
+                ON brand.brand_sid= rental.brand_sid
+                WHERE rental_price > %s
+                ORDER BY rental_product_sid
+                DESC LIMIT %s, %s ",
+                $_GET['money'],
+                ($page - 1) * $perPage,
+                $perPage
+            );
+        };
+    };
+
+    if($_GET['compare']=="smaller"){
+            $t_sql = sprintf(
+                "SELECT COUNT(1) FROM rental 
+                WHERE rental_price < %s
+                ORDER BY rental_product_sid",
+                $_GET['money']);
 
 
-$rows = $pdo->query($sql)->fetchAll();
+            $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+            $totalPages = ceil($totalRows / $perPage);
+
+            $rows = [];
+            // 如果有資料
+            if ($totalRows) {
+                if ($page < 1) {
+                    header('Location: ?page=1');
+                    exit;
+                };
+                if ($page > $totalPages) {
+                    header('Location: ?page=' . $totalPages);
+                    exit;
+                };
+            };
+
+            $sql = sprintf(
+                        "SELECT * FROM rental  
+                        JOIN product_category 
+                        ON rental.product_category_sid=product_category.product_category_sid 
+                        JOIN brand
+                        ON brand.brand_sid= rental.brand_sid
+                        WHERE rental_price < %s
+                        ORDER BY rental_product_sid
+                        DESC LIMIT %s, %s ",
+                        $_GET['money'],
+                        ($page - 1) * $perPage,
+                        $perPage
+                    );
+
+    };
+    $rows = $pdo->query($sql)->fetchAll();
+}else{
+    header('Location: 2list_rental.php');
+};
+
+
+
 
 
 // $output = [
@@ -37,32 +116,43 @@ $rows = $pdo->query($sql)->fetchAll();
     <div class="row">
 
         <form id="form2" name="form2">
-            <label for="">價格大於</label>
+            <label for="">價格</label>
+            <select name="compare" id="compare">
+                            <option value="bigger">
+                                    大於
+                            </option>
+                            <option value="smaller">
+                                    小於
+                            </option>
+                        </select>
             <input type="text" name="money" id="hey" style="width:75px;">
             <button type="button" id="btn2" onclick="test2()">篩選</button>
+            <button type="button" id="btn3" onclick="test3()">取消篩選</button>
         </form>
 
         <div class="col" style="display:flex; justify-content:space-between;">
+
+
             <nav aria-label="Page navigation example">
-                <ul class="pagination">
+                <ul class="pagination" <?= $totalPages==1 ? 'style="display:none"':''  ?>>
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <a class="page-link" href="3listtest.php?money=<?= $_GET['money'] ?>&page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
                     </li>
-                    <!-- 
+                    
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
                     ?>
                             <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                <a class="page-link" href="?money=<?= $_GET['money'] ?>&page=<?= $i ?>"><?= $i ?></a>
                             </li>
                     <?php
                         endif;
-                    endfor; ?> -->
+                    endfor; ?> 
 
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <a class="page-link" href="3listtest.php?money=<?= $_GET['money'] ?>&page=<?= $page + 1 ?>">
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>
                     </li>
@@ -127,9 +217,13 @@ $rows = $pdo->query($sql)->fetchAll();
 <script>
     function test2() {
         let money = document.querySelector("#hey").value;
-        location.href = '3listtest.php?money=' + money;
+        let compare = document.querySelector("#compare").value;
+        location.href = '3listtest.php?money=' + money+'&compare='+compare;
     };
 
+    function test3() {
+        location.href = '2list_rental.php?'
+    };
 
     const insert = document.querySelector("#insert");
     insert.addEventListener("click", event => {

@@ -29,7 +29,7 @@ if ($totalRows) {
         ON rental.product_category_sid=product_category.product_category_sid 
         JOIN brand
         ON brand.brand_sid= rental.brand_sid
-        ORDER BY rental_product_sid 
+        ORDER BY rental_price 
         DESC LIMIT %s, %s ",
         ($page - 1) * $perPage,
         $perPage
@@ -57,16 +57,26 @@ $output = [
 <div class="container">
     <div class="row">
         <form id="form2" name="form2">
-            <label for="">價格大於</label>
+            <label for="">價格</label>
+            
+                        <select name="compare" id="compare">
+                            <option value="bigger">
+                                    大於
+                            </option>
+                            <option value="smaller">
+                                    小於
+                            </option>
+                        </select>
             <input type="text" name="money" id="hey" style="width:75px;">
             <button type="button" id="btn2" onclick="test2()">篩選</button>
+            <button type="button" id="btn3" onclick="test3()">取消篩選</button>
         </form>
         
         <div class="col" style="display:flex; justify-content:space-between;">
         
            
         <nav aria-label="Page navigation example">
-                <ul class="pagination">
+                <ul class="pagination" <?= $totalPages==1 ? 'style="display:none"':''  ?>>
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
@@ -90,7 +100,11 @@ $output = [
                     </li>
                 </ul>
             </nav>
-            <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
+            <div>
+                <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
+                <button id="analy" type="button" class="btn btn-primary">租借商品分析</button>
+            </div>
+            
         </div>
     </div>
 
@@ -149,15 +163,24 @@ $output = [
 <script>
     function test2() {
         let money = document.querySelector("#hey").value;
-        location.href = '3listtest.php?money=' + money;
+        if(money==""){
+            location.href = '2list_rental.php?'
+        };
+        let compare = document.querySelector("#compare").value;
+        location.href = '3listtest.php?money=' + money+'&compare='+compare;
     };
 
 
+    function test3() {
+        location.href = '2list_rental.php?'
+    };
 
 
-
-
-
+    
+    const analybtn = document.querySelector("#analy");
+    analybtn.addEventListener("click", event => {
+        location.href = '3analy_rental.php';
+    });
 
 
     const insertx = document.querySelector("#insertx");
@@ -180,5 +203,7 @@ $output = [
     insert.addEventListener("click", event => {
         location.href = '2add_rental.php'
     })
+
+
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>
