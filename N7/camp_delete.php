@@ -1,5 +1,5 @@
 <?php
-require '../yeh/parts/connect_-db.php';
+require '../yeh/parts/connect-db.php';
 
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0; //要有那個sid 才可以抓到那個sid
 

@@ -1,5 +1,5 @@
 <?php
-require '../yeh/parts/connect_-db.php';
+require '../yeh/parts/connect-db.php';
 
 header('Content-Type: application/json');
 $folder = __DIR__ . '/camp_uploads/'; //上傳檔案的資料夾

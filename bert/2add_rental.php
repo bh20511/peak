@@ -1,6 +1,6 @@
-<?php require '../yeh/parts/admin-req.php';?>
+<?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php';
-$pageName = 'insert';
+$pageName = 'rental_list';
 ?>
 
 
@@ -31,11 +31,11 @@ $rows2 = $pdo->query($sql2)->fetchAll();
                             <label for="name" class="form-label">租借品名</label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                        
+
                         <label for="sid">商品種類</label>
                         <select name="sid" id="sid">
-                           <?php foreach ($rows as $r) : ?>
-                                <option value="<?= $r['product_category'] ?>">
+                            <?php foreach ($rows as $r) : ?>
+                                <option value="<?= $r['product_category_sid'] ?>">
                                     <?= $r['product_category'] ?>
                                 </option>
                             <?php endforeach; ?>
@@ -43,7 +43,7 @@ $rows2 = $pdo->query($sql2)->fetchAll();
 
                         <label for="sid">商品品牌</label>
                         <select name="brand_sid" id="brand_sid">
-                           <?php foreach ($rows2 as $w) : ?>
+                            <?php foreach ($rows2 as $w) : ?>
                                 <option value="<?= $w['brand_sid'] ?>">
                                     <?= $w['brand_name'] ?>
                                 </option>
@@ -87,10 +87,10 @@ $rows2 = $pdo->query($sql2)->fetchAll();
             method: 'POST',
             body: fd
         }).then(r => r.json()).then(obj => {
-            if(obj.success){
+            if (obj.success) {
                 alert("新增完成");
-            location.href = "2add_rental.php";
-            }else{
+                location.href = "2add_rental.php";
+            } else {
                 alert("新增失敗,請檢查必要資訊");
             }
         })

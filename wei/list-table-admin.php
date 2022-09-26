@@ -22,6 +22,7 @@
                             </th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
                             <tr>

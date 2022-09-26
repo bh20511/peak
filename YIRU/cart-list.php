@@ -168,7 +168,7 @@ if (!isset($_SESSION['renCart'])) {
                                 <i class="fa-solid fa-trash-can"></i>
                             </th>
                             <th scope="col">封面</th>
-                            <th scope="col">商品名稱</th>
+                            <th scope="col">活動名稱</th>
                             <th scope="col">單價</th>
                             <th scope="col">數量</th>
                             <th scope="col">金額</th>
@@ -557,12 +557,8 @@ if (!isset($_SESSION['renCart'])) {
                         body: fd
                     })
                     .then(r => r.text())
-                    .then(obj => {
-                        if (obj.success) {
-                            fetch('clean-api.php');
-                        }
-                    });
-                setTimeout('location.href="order.php"', 800)
+                    .then(obj => console.log(obj));
+                setTimeout('location.href="order.php"', 900)
             }
         })
     }

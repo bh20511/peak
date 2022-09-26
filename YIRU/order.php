@@ -1,8 +1,9 @@
 <?php require '../yeh/parts/connect-db.php';
 
 $pageName = 'order';
+
 $m_s = $_SESSION['member']['member_sid'];
-$order = "SELECT * FROM `order` WHERE member_sid = $m_s ";
+$order = "SELECT * FROM `order` WHERE member_sid = $m_s ORDER BY `sid` DESC";
 $order_stmt = $pdo->query($order)->fetchAll();
 
 //商品
@@ -11,7 +12,7 @@ join product on product_order.products_sid= product.product_sid where order.memb
 $product_order_product = $pdo->query($sql)->fetchAll();
 
 //訂房
-$sql2 = "SELECT * FROM `order`join `booking_order` on order.order_num = booking_order.order_num 
+$sql2 = "SELECT * FROM `order`join `booking_order` on `order`.order_num = booking_order.order_num 
 join room on booking_order.room_sid= room.room_sid where order.member_sid=$m_s";
 $product_order_room = $pdo->query($sql2)->fetchAll();
 
@@ -39,13 +40,12 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
     .accordion-button div {
         width: 50%;
-
-
+        /* color:red; */
+        font-weight: 900;
     }
 
     div.accordion-body.product {
         background-color: #F3BF88;
-
     }
 
     div.accordion-body.room {
@@ -63,44 +63,50 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
     }
 
-    /* #collapseOne {
-        display: flex;
+    .accordion-he {
+        border: 1px solid black;
+        padding: 15px;
+        border-radius: 10px;
+        /* background-color: #91B493; */
+        /* background-color: #c89b40; */
+        background-color: #eedeb0;
+        font-weight: 600;
     }
-
-    #collapseOne div {
-        width: 33.333%;
-    } */
+    .col{
+        padding: 0 120px;
+    }
+    .ero{
+        margin-top: 20px;
+    }
+    
 </style>
 <?php include '../yeh/parts/nav-m.php'; ?>
 
 
 <!-- ---------------------- -->
-<div class="container">
+<div class="container ero">
     <div class="row">
         <div class="col">
             <?php foreach ($order_stmt as $o) : ?>
-
-                <div class="accordion" id="accordionExample">
+                <div class="accordio" id="accordionExample">
                     <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button  " type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
-
+                        <h2 class="accordion-he" id="headingOne">
+                            <button class="accordion-button" type=" button" data-bs-toggle="collapse" data-bs-target="#C<?= $o['order_num'] ?>" aria-expanded="false" aria-controls="collapseOne">
                                 <div> 訂單編號 :<?= $o['order_num'] ?></div>
                                 <div>金額 :<?= $o['total'] ?></div>
-
+                                <div>訂單日期 :<?= $o['created_time'] ?></div>
                             </button>
                         </h2>
-
-
                         <div id="C<?= $o['order_num'] ?>" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-
-
 
                             <!-- -------------------------產品-------------------------- -->
                             <?php foreach ($product_order_product as $q) : ?>
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body product">
                                         商品： <?= $q['product_name'] ?>
+                                    </div>
+                                    <div class="accordion-body product">
+                                        單價： <?= $q['product_price'] ?>
                                     </div>
                                     <div class="accordion-body product">
                                         數量： <?= $q['qty'] ?>
@@ -122,6 +128,15 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                         訂房資訊： <?= $q['room_name'] ?>
                                     </div>
                                     <div class="accordion-body room">
+                                        入住時間： <?= $q['start'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        退房時間： <?= $q['end'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
+                                        單價： <?= $q['room_price'] ?>
+                                    </div>
+                                    <div class="accordion-body room">
                                         人數： <?= $q['qty'] ?>
                                     </div>
                                     <div class="accordion-body room">
@@ -140,6 +155,9 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
                                 <?php if ($o['order_num'] == $q['order_num']) : ?>
                                     <div class="accordion-body rental">
                                         租借商品： <?= $q['rental_product_name'] ?>
+                                    </div>
+                                    <div class="accordion-body rental">
+                                        單價： <?= $q['rental_price'] ?>
                                     </div>
                                     <div class="accordion-body rental">
                                         數量： <?= $q['qty'] ?>
@@ -182,9 +200,6 @@ $product_order_camp = $pdo->query($sql4)->fetchAll();
 
 <?php include '../yeh/parts/scripts.php'; ?>
 <script>
-    const btn = document.querySelector('#btn');
-    btn.addEventListener('click', () => {
 
-    })
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>

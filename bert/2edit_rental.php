@@ -1,6 +1,6 @@
 <?php require '../yeh/parts/admin-req.php'; ?>
 <?php require '../yeh/parts/connect-db.php';
-$pageName = 'edit';
+$pageName = 'rental_list';
 
 $rental_product_sid = isset($_GET['rental_product_sid']) ? intval($_GET['rental_product_sid']) : 0;
 if (empty($rental_product_sid)) {

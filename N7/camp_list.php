@@ -31,7 +31,7 @@ if ($totalRows) {
     }
 
     $sql = sprintf(
-        "SELECT * FROM campaign  ORDER BY sid  LIMIT %s, %s",
+        "SELECT * FROM campaign  ORDER BY sid DESC  LIMIT %s, %s",
         ($page - 1) * $perpage,
         $perpage
     ); // 索引值0, 開始取perpage比數的資料
@@ -79,7 +79,7 @@ $output = [
                     <?php for ($i = $page - 5; $i <=  $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
                     ?>
-                            <li class="page-item">
+                            <li class="page-item <?= $i == $page ? 'active' : '' ?>">
                                 <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                             </li>
                     <?php

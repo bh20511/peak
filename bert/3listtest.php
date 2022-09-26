@@ -5,68 +5,119 @@ $pageName = 'rental_list';
 $perPage = 20; // 一頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-// 算總筆數
-$t_sql = "SELECT COUNT(1) FROM rental ";
-$totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-
-$totalPages = ceil($totalRows / $perPage);
-
-$rows = [];
-// 如果有資料
-if ($totalRows) {
-    if ($page < 1) {
-        header('Location: ?page=1');
-        exit;
-    }
-    if ($page > $totalPages) {
-        header('Location: ?page=' . $totalPages);
-        exit;
-    }
-
-    $sql = sprintf(
-        "SELECT * FROM rental  
-        JOIN product_category 
-        ON rental.product_category_sid=product_category.product_category_sid 
-        JOIN brand
-        ON brand.brand_sid= rental.brand_sid
-        ORDER BY rental_price 
-        DESC LIMIT %s, %s ",
-        ($page - 1) * $perPage,
-        $perPage
-    );
-    // $sql = "SELECT * FROM rental";
-    $rows = $pdo->query($sql)->fetchAll();
+if($_GET['money']==""){
+    header('Location: 2list_rental.php');
 }
-// echo json_encode($rows); exit;
-$output = [
-    'totalRows' => $totalRows,
-    'totalPages' => $totalPages,
-    'page' => $page,
-    'rows' => $rows,
-    'perPage' => $perPage,
-];
 
-// echo json_encode($output); exit;
+
+// 算總筆數
+if(isset($_GET['compare'])){
+    if($_GET['compare']=="bigger"){
+        $t_sql = sprintf(
+        "SELECT COUNT(1) FROM rental 
+        WHERE rental_price > %s
+        ORDER BY rental_product_sid",
+        $_GET['money']
+        );
+        $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+
+        $totalPages = ceil($totalRows / $perPage);
+
+        $rows = [];
+        // 如果有資料
+        if ($totalRows) {
+            if ($page < 1) {
+            header('Location: ?page=1');
+            exit;
+            };
+            if ($page > $totalPages) {
+            header('Location: ?page=' . $totalPages);
+            exit;
+            };
+
+            $sql = sprintf(
+                "SELECT * FROM rental  
+                JOIN product_category 
+                ON rental.product_category_sid=product_category.product_category_sid 
+                JOIN brand
+                ON brand.brand_sid= rental.brand_sid
+                WHERE rental_price > %s
+                ORDER BY rental_product_sid
+                DESC LIMIT %s, %s ",
+                $_GET['money'],
+                ($page - 1) * $perPage,
+                $perPage
+            );
+        };
+    };
+
+    if($_GET['compare']=="smaller"){
+            $t_sql = sprintf(
+                "SELECT COUNT(1) FROM rental 
+                WHERE rental_price < %s
+                ORDER BY rental_product_sid",
+                $_GET['money']);
+
+
+            $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
+            $totalPages = ceil($totalRows / $perPage);
+
+            $rows = [];
+            // 如果有資料
+            if ($totalRows) {
+                if ($page < 1) {
+                    header('Location: ?page=1');
+                    exit;
+                };
+                if ($page > $totalPages) {
+                    header('Location: ?page=' . $totalPages);
+                    exit;
+                };
+            };
+
+            $sql = sprintf(
+                        "SELECT * FROM rental  
+                        JOIN product_category 
+                        ON rental.product_category_sid=product_category.product_category_sid 
+                        JOIN brand
+                        ON brand.brand_sid= rental.brand_sid
+                        WHERE rental_price < %s
+                        ORDER BY rental_product_sid
+                        DESC LIMIT %s, %s ",
+                        $_GET['money'],
+                        ($page - 1) * $perPage,
+                        $perPage
+                    );
+
+    };
+    $rows = $pdo->query($sql)->fetchAll();
+}else{
+    header('Location: 2list_rental.php');
+};
+
+
+
+
+
+// $output = [
+//     'totalRows' => $totalRows,
+//     'totalPages' => $totalPages,
+//     'page' => $page,
+//     'rows' => $rows,
+//     'perPage' => $perPage,
+// ];
+
+
 ?>
-
-
-
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php include '../yeh/parts/nav.php'; ?>
-<style>
-    #form3{
-        position: absolute;
-        top: 60px;
-        left: 50%;
-    }
-</style>
 
 <div class="container">
     <div class="row">
+
         <form id="form2" name="form2">
             <label for="">價格</label>
-            
-                        <select name="compare" id="compare">
+            <select name="compare" id="compare">
                             <option value="bigger">
                                     大於
                             </option>
@@ -78,52 +129,36 @@ $output = [
             <button type="button" id="btn2" onclick="test2()">篩選</button>
             <button type="button" id="btn3" onclick="test3()">取消篩選</button>
         </form>
-        
+
         <div class="col" style="display:flex; justify-content:space-between;">
-        
-           
-        <nav aria-label="Page navigation example">
+
+
+            <nav aria-label="Page navigation example">
                 <ul class="pagination" <?= $totalPages==1 ? 'style="display:none"':''  ?>>
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <a class="page-link" href="3listtest.php?money=<?= $_GET['money'] ?>&page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
                     </li>
-
+                    
                     <?php for ($i = $page - 5; $i <= $page + 5; $i++) :
                         if ($i >= 1 and $i <= $totalPages) :
                     ?>
                             <li class="page-item <?= $i == $page ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                <a class="page-link" href="?money=<?= $_GET['money'] ?>&page=<?= $i ?>"><?= $i ?></a>
                             </li>
                     <?php
                         endif;
-                    endfor; ?>
+                    endfor; ?> 
 
                     <li class="page-item <?= $totalPages == $page ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <a class="page-link" href="3listtest.php?money=<?= $_GET['money'] ?>&page=<?= $page + 1 ?>">
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>
                     </li>
                 </ul>
             </nav>
-            
-            <div>
-
-                <form id="form3" name="form3">
-                    <div>
-                        <input type="text" class="from-control mb-3" id="autocomplete" name="pname">
-                    <div class="list-group">
-                        <!--按鈕位置-->
-                    </div>
-                </div>
-                    <button type="button" id="btn3" onclick="test4()">搜尋商品</button>
-                </form>
-                
-                <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
-                <button id="analy" type="button" class="btn btn-primary">租借商品分析</button>
-            </div>
-            
+            <button id="insert" type="button" class="btn btn-primary">新增租借商品</button>
         </div>
     </div>
 
@@ -182,35 +217,19 @@ $output = [
 <script>
     function test2() {
         let money = document.querySelector("#hey").value;
-        if (money == "") {
-            location.href = '2list_rental.php?'
-        };
         let compare = document.querySelector("#compare").value;
-        location.href = '3listtest.php?money=' + money + '&compare=' + compare;
+        location.href = '3listtest.php?money=' + money+'&compare='+compare;
     };
-
-
 
     function test3() {
         location.href = '2list_rental.php?'
     };
 
-    function test4() {
-        let pname = document.querySelector("#autocomplete").value;
-        location.href = '2search.php?pname=' + pname;
-    };
-
-    const analybtn = document.querySelector("#analy");
-    analybtn.addEventListener("click", event => {
-        location.href = '3analy_rental.php';
-    });
-
-
-    const insertx = document.querySelector("#insertx");
-    insertx.addEventListener("click", event => {
+    const insert = document.querySelector("#insert");
+    insert.addEventListener("click", event => {
         console.log("a");
         location.href = '2add_rental.php';
-    });
+    })
 
 
 
@@ -222,54 +241,5 @@ $output = [
             location.href = `2delete_rental.php?rental_product_sid=${a}`;
         }
     }
-
-
-    const inputText = document.querySelector("#autocomplete");
-    const listData = document.querySelector(".list-group");
-    inputText.addEventListener("input", event => {
-        let keyword = event.target.value;
-        if(keyword==""){
-            while (listData.hasChildNodes()) {
-                listData.removeChild(listData.lastChild);
-            }
-        }
-        if (keyword !== "") {
-            while (listData.hasChildNodes()) {
-                listData.removeChild(listData.lastChild);
-            }
-
-            fetch('3show_api.php').
-            then(r => r.json()).
-            then(obj => {
-                let Datas = obj.product_name;
-
-
-
-
-                let results = Datas.filter(function(element, index, arr) {
-                    return element.indexOf(keyword) !== -1;
-                });
-
-                let docFrag = document.createDocumentFragment();
-                results.forEach(result => {
-                    let btn = document.createElement("button");
-                    btn.setAttribute("type", "button");
-                    btn.classList.add("list-group-item", "list-group-item-action");
-                    let txtBtn = document.createTextNode(result);
-                    btn.appendChild(txtBtn);
-                    btn.addEventListener("click", event => {
-                        inputText.value = event.target.textContent
-                        while (listData.hasChildNodes()) {
-                            listData.removeChild(listData.lastChild);
-                        }
-                    });
-                    docFrag.appendChild(btn);
-                })
-                listData.appendChild(docFrag);
-
-            });
-
-        }
-    });
 </script>
 <?php include '../yeh/parts/html-foot.php'; ?>

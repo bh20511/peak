@@ -156,7 +156,6 @@ $output = [
             })
             .then(r => r.json())
             .then(function(data) {
-                count(data)
                 console.log(data)
             })
         Swal.fire({
