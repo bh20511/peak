@@ -15,7 +15,7 @@ if ($find == "") {
     $t_sql = "SELECT COUNT(1) FROM `members`";
 } else {
     // $t_sql = sprintf("SELECT * FROM `members` WHERE `mobile`LIKE "%s%"" , $find);
-    $t_sql = "SELECT COUNT(1) FROM `members` WHERE `mobile` LIKE '".$find."%'" ;
+    $t_sql = "SELECT COUNT(1) FROM `members` WHERE `mobile` LIKE '%".$find."%'" ;
 }
 
 // print_r($t_sql);
