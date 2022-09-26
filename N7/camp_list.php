@@ -100,7 +100,7 @@ $output = [
 
     <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-info <?= $page_name == 'camp_insert_form' ? 'active' : '' ?>">
+            <button type="button" class="btn btn-info <?= $page_name == 'camp_list' ? 'active' : '' ?>">
                 <a class="nav-link" href="camp_insert_form.php">新增活動</a>
             </button>
             <table class="table table-striped table-bordered">
