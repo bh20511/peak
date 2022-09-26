@@ -132,7 +132,7 @@ if ($totalRows) {
                     <th scope="col">高度總計</th> -->
                         <th scope="col">頭像</th>
                         <th scope="col">創建時間</th>
-                        <th scope="col">訂單</th>
+                        <th scope="col">訂單筆數</th>
                         <th scope="col">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </th>
@@ -163,7 +163,14 @@ if ($totalRows) {
                                 <?php endif; ?>
                             </td>
                             <td><?= $r['created_at'] ?></td>
-                            <td><a href="member-order.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>&find=<?= $find ?>">瀏覽</a></td>
+                            <td><a href="member-order.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>&find=<?= $find ?>">
+                            <!-- 瀏覽 -->
+                            <?php
+                            $sqlo= sprintf("SELECT COUNT(1) FROM `order` WHERE member_sid = %s", $r['member_sid']);
+                            $order =  $pdo->query($sqlo)->fetch(PDO::FETCH_NUM)[0];
+                            echo $order;
+                            ?>
+                            </a></td>
                             <td>
                                 <a href="member-edit-form.php?member_sid=<?= $r['member_sid'] ?>&page=<?= $page ?>">
                                     <i class="fa-solid fa-pen-to-square"></i>

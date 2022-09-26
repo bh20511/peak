@@ -23,15 +23,15 @@ $pageName = "members";
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" value="陳力誠">
                         </div>
                         <div class="mb-3">
                             <label for="nickname" class="form-label">暱稱</label>
-                            <input type="text" class="form-control" id="nickname" name="nickname">
+                            <input type="text" class="form-control" id="nickname" name="nickname" value="阿誠">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">密碼 (6 位數以上，並且至少包含 大寫字母、小寫字母、數字、符號 各一)</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" value ="Chen123*">
                             <input type="checkbox" name="showpass" id="showpass" onclick="showPw()">
                             <label for="showpass">顯示密碼</label>
                         </div>
@@ -42,12 +42,12 @@ $pageName = "members";
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">手機號碼</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}">
+                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{2}-?\d{3}-?\d{3}" value="0911223344">
                             <!-- pattern可以做regex的驗證 不用倒斜線直接 "" -->
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">電子信箱</label>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input type="text" class="form-control" id="email" name="email" value="chen@test.com">
                         </div>
                         <div class="mb-3">
                             <label for="birthday" class="form-label">生日</label>
