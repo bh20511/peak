@@ -55,7 +55,7 @@ if ($totalRows) {
         //  $pageIndex = ($page - 1) * $perPage;
         //  $sql = "SELECT * FROM `members` ORDER BY `member_sid` WHERE `mobile` LIKE'".$find."%' DESC LIMIT "
         //  .$pageIndex.",".$perPage.""; 
-        $sql1 = "SELECT * FROM `members` WHERE `mobile` LIKE '".$find."%'"."ORDER BY `member_sid` DESC";
+        $sql1 = "SELECT * FROM `members` WHERE `mobile` LIKE '%".$find."%'"."ORDER BY `member_sid` DESC";
         $sql2 = sprintf(" LIMIT %s, %s",($page - 1) * $perPage, $perPage);
         $sql = $sql1.$sql2;
         
