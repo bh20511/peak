@@ -138,6 +138,9 @@ try {
     $output['error'] = $ex->getMessage();
 }
 
+if($_POST['nickname']){
+    $_SESSION['member']['nickname'] = $_POST['nickname'];
+}
 
 if ($filename !== $_POST['avatar'])
 // if ($filename !== NULL) 

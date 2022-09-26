@@ -1,6 +1,13 @@
 <?php require '../yeh/parts/connect-db.php';
 
+
 $pageName = 'members';
+
+if (empty($_GET['member_sid'])) {
+    header('Location: ../yeh/members-list.php');
+    exit;
+}
+
 $m_s = $_GET['member_sid'];
 $order = "SELECT * FROM `order` WHERE member_sid = $m_s ";
 $order_stmt = $pdo->query($order)->fetchAll();

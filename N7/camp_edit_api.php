@@ -1,6 +1,6 @@
 <?php
 
-require '../yeh/parts/connect_-db.php';
+require '../yeh/parts/connect-db.php';
 
 $folder = __DIR__ . '/camp_uploads/';
 
