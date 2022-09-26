@@ -69,7 +69,7 @@ if (!empty($_FILES['single']['name'])) {
     `picture`=?,
     `product_description`=?,
     `brand_sid`=?
-    where sid=?";
+    where product_sid=?";
     $stmt = $pdo->prepare($sql);
     try {
         $stmt->execute([
@@ -80,7 +80,7 @@ if (!empty($_FILES['single']['name'])) {
             $filename,
             $_POST['product_description'],
             $_POST['brand_sid'],
-            $_POST['sid']
+            $_POST['product_sid']
         ]);
     } catch (PDOException $ex) {
         $output['error'] = $ex->getMessage();
