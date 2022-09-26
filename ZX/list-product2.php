@@ -6,7 +6,15 @@
 $pageName = 'product-list'; // 設置當前所在頁面
 $prepage = 5; // 每頁5個
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;  //設置第幾頁面，如果沒有預設都是第一頁
-$t_sql = "SELECT count(1) FROM product ";
+
+$price = isset($_GET['price']) ? intval($_GET['price']) : 1;
+
+
+
+
+
+
+$t_sql = sprintf("SELECT count(1) FROM product WHERE product_price >= %s order by product_price", $price);
 
 
 
@@ -31,9 +39,14 @@ if ($totalrows) {
         header('Location: ?page=' . $totalpage);
         exit;
     }
+
+
+
+
+
     //因後方有%s 需要帶入 並用sprintf 來解決 sprintf(format,arg1,arg2,arg++)
     //litmit(起始index, 往後算多少個)
-    $sql = sprintf("SELECT * FROM product ORDER BY `product_sid` DESC LIMIT %s,%s", ($page - 1) * $prepage, $prepage);
+    $sql = sprintf("SELECT * FROM product where product_price >= %s ORDER BY `product_price` DESC LIMIT %s,%s", $price, ($page - 1) * $prepage, $prepage);
 
     //取出所有的資料
     $rows = $pdo->query($sql)->fetchAll();
@@ -78,19 +91,19 @@ $output = [
                 <ul class="pagination">
 
                     <li class="page-item <?= 1 == $page ? 'disabled' : 0 ?>">
-                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>&price=<?= $price ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
                         </a>
                     </li>
 
                     <?php for ($i = 1; $i <= $totalpage; $i++) : ?>
                         <li class="page-item <?= $i == $page ? 'active' : 0 ?>">
-                            <a class="page-link" href=" ?page=<?= $i ?>"><?= $i ?></a>
+                            <a class="page-link" href=" ?page=<?= $i ?>&price=<?= $price ?>"><?= $i ?></a>
                         </li>
                     <?php endfor; ?>
 
                     <li class="page-item <?= $totalpage == $page ? 'disabled' : 0 ?>">
-                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>&price=<?= $price ?>">
                             <i class="fa-solid fa-circle-arrow-right"></i>
                         </a>
                     </li>
@@ -187,7 +200,6 @@ $output = [
     insert.addEventListener("click", event => {
         location.href = 'insert-product.php'
     })
-
 
     function filter() {
         const price = document.querySelector("#price").value;
