@@ -29,7 +29,7 @@ if ($totalRows) {
         exit;
     }
 
-    $sql = sprintf("SELECT * FROM room JOIN mountain ON mountain.mountain_sid=room.mountain_sid JOIN location ON location.sid=room.location_sid ORDER BY room_sid ASC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM room JOIN mountain ON mountain.mountain_sid=room.mountain_sid JOIN location ON location.sid=room.location_sid ORDER BY room_sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
     $rows = $pdo->query($sql)->fetchAll();
 }
@@ -50,7 +50,7 @@ $output = [
 <?php include '../yeh/parts/nav.php'; ?>
 
 <div class="container">
-<input type="text" name="price" id="price" placeholder="請輸入金額">
+<input type="text" name="price" id="price" placeholder="請輸入金額篩選">
         <button onclick="filter()" class="btn btn-primary" >送出</button>
     <div class="row">
         <div class="col" style="display:flex; justify-content:space-between;">

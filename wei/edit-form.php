@@ -1,7 +1,8 @@
 <?php
 require '../yeh/parts/admin-req.php';
 require '../yeh/parts/connect-db.php';
-$pageName = 'edit';
+$pageName = 'room_list';
+
 
 
 $sid = isset($_GET['room_sid']) ? intval($_GET['room_sid']) : 0;
