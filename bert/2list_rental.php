@@ -54,7 +54,7 @@ $output = [
 <?php require '../yeh/parts/html-head.php'; ?>
 <?php include '../yeh/parts/nav.php'; ?>
 <style>
-    #form3{
+    #form3 {
         position: absolute;
         top: 60px;
         left: 50%;
@@ -65,25 +65,25 @@ $output = [
     <div class="row">
         <form id="form2" name="form2">
             <label for="">價格</label>
-            
-                        <select name="compare" id="compare">
-                            <option value="bigger">
-                                    大於
-                            </option>
-                            <option value="smaller">
-                                    小於
-                            </option>
-                        </select>
+
+            <select name="compare" id="compare">
+                <option value="bigger">
+                    大於
+                </option>
+                <option value="smaller">
+                    小於
+                </option>
+            </select>
             <input type="text" name="money" id="hey" style="width:75px;">
             <button type="button" id="btn2" onclick="test2()">篩選</button>
             <button type="button" id="btn3" onclick="test3()">取消篩選</button>
         </form>
-        
+
         <div class="col" style="display:flex; justify-content:space-between;">
-        
-           
-        <nav aria-label="Page navigation example">
-                <ul class="pagination" <?= $totalPages==1 ? 'style="display:none"':''  ?>>
+
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination" <?= $totalPages == 1 ? 'style="display:none"' : ''  ?>>
                     <li class="page-item <?= 1 == $page ? 'disabled' : '' ?>">
                         <a class="page-link" href="?page=<?= $page - 1 ?>">
                             <i class="fa-solid fa-circle-arrow-left"></i>
@@ -107,23 +107,23 @@ $output = [
                     </li>
                 </ul>
             </nav>
-            
+
             <div>
 
                 <form id="form3" name="form3">
                     <div>
                         <input type="text" class="from-control mb-3" id="autocomplete" name="pname">
-                    <div class="list-group">
-                        <!--按鈕位置-->
+                        <div class="list-group">
+                            <!--按鈕位置-->
+                        </div>
                     </div>
-                </div>
                     <button type="button" id="btn3" onclick="test4()">搜尋商品</button>
                 </form>
-                
+
                 <button id="insertx" type="button" class="btn btn-primary">新增租借商品</button>
                 <button id="analy" type="button" class="btn btn-primary">租借商品分析</button>
             </div>
-            
+
         </div>
     </div>
 
@@ -224,11 +224,31 @@ $output = [
     }
 
 
+
+    timer = null
+    const debounce = (callback, time = 500) => {
+        window.clearTimeout(timer); //清除setTimeout的設定
+        //time的時間未到，debounce這個function又被呼叫
+        //就會把setTimeout的設定取消，表示callback的function不會被執行
+        //所以callback的function什麼時後會被執行呢??
+        timer = window.setTimeout(callback, time)
+    };
+
+
+    
+
+
     const inputText = document.querySelector("#autocomplete");
     const listData = document.querySelector(".list-group");
+    
+    function read(evt) {
+        inputText.value = evt.target.textContent;
+        listData.style.display = "none";
+    };
+
     inputText.addEventListener("input", event => {
         let keyword = event.target.value;
-        if(keyword==""){
+        if (keyword == "") {
             while (listData.hasChildNodes()) {
                 listData.removeChild(listData.lastChild);
             }
@@ -246,26 +266,48 @@ $output = [
 
 
 
-                let results = Datas.filter(function(element, index, arr) {
-                    return element.indexOf(keyword) !== -1;
-                });
 
-                let docFrag = document.createDocumentFragment();
-                results.forEach(result => {
-                    let btn = document.createElement("button");
-                    btn.setAttribute("type", "button");
-                    btn.classList.add("list-group-item", "list-group-item-action");
-                    let txtBtn = document.createTextNode(result);
-                    btn.appendChild(txtBtn);
-                    btn.addEventListener("click", event => {
-                        inputText.value = event.target.textContent
-                        while (listData.hasChildNodes()) {
-                            listData.removeChild(listData.lastChild);
-                        }
-                    });
-                    docFrag.appendChild(btn);
-                })
-                listData.appendChild(docFrag);
+                //搜尋景點名稱中有使用者搜尋的內容
+                let results = Datas.filter(data => data.indexOf(keyword) !== -1)
+                const contentChange = () => {
+                    //顯示搜尋結果
+                    //["<button>","<button>"]
+                    let htmldatas = results.map(data => {
+                        return (
+                            `<button type="button" onclick="read(event)" class="list-group-item list-group-item-action">${data.trim()}</button>`
+                        )
+                    })
+                    listData.innerHTML = htmldatas.join(""); //<button><button>
+                }
+
+
+                debounce(contentChange, 1000);
+
+
+                // let results = Datas.filter(function(element, index, arr) {
+                //     return element.indexOf(keyword) !== -1;
+                // });
+
+                // let docFrag = document.createDocumentFragment();
+                // results.forEach(result => {
+                //     let btn = document.createElement("button");
+                //     btn.setAttribute("type", "button");
+                //     btn.classList.add("list-group-item", "list-group-item-action");
+                //     let txtBtn = document.createTextNode(result);
+                //     btn.appendChild(txtBtn);
+                //     btn.addEventListener("click", event => {
+                //         inputText.value = event.target.textContent
+                //         while (listData.hasChildNodes()) {
+                //             listData.removeChild(listData.lastChild);
+                //         }
+                //     });
+                //     docFrag.appendChild(btn);
+                // })
+                // listData.appendChild(docFrag);
+                function read(evt) {
+                    inputText.value = evt.target.textContent;
+                    listData.style.display = "none";
+                }
 
             });
 
