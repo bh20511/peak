@@ -206,7 +206,7 @@ $output = [
     // 假連結的function
     function delete_it(sid) {
         if (confirm(`確定要刪除campaign表單編號為sid= ${sid}的資料嗎?`)) {
-            location.href = `delete.php?sid=${sid}`;
+            location.href = `camp_delete.php?sid=${sid}`;
         }
     }
 
