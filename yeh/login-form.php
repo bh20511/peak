@@ -29,6 +29,7 @@ if (!empty($_SESSION['admin'])) {
                             <label for="showpass">顯示密碼</label>
                         </div>
                         <button type="submit" class="btn btn-primary">登入</button>
+                    </form>
                 </div>
             </div>
         </div>
