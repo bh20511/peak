@@ -7,6 +7,7 @@ $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $pageName = 'room_list';
 
 //算資料的總筆數
+//test
 
 $t_sql = "SELECT COUNT(1) FROM room";
 
