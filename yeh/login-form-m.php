@@ -31,6 +31,7 @@ if(!empty($_SESSION['member'])){
 
                         <button type="submit" class="btn btn-primary">登入</button>
                         <button class="btn btn-primary ms-4" onclick='newMember(); return false;'>註冊</button>
+                    </form>
                 </div>
             </div>
         </div>
