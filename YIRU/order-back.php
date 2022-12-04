@@ -4,7 +4,7 @@ require '../yeh/parts/connect-db.php';
 
 $pageName = 'order-back-list';
 
-$order = "SELECT * FROM `order` ORDER BY `sid` DESC";
+$order = "SELECT * FROM `order` ORDER BY `order_sid` DESC";
 $order_stmt = $pdo->query($order)->fetchAll();
 
 //商品
@@ -21,7 +21,7 @@ $product_order_room = $pdo->query($sql2)->fetchAll();
 
 //租借
 $sql3 = "SELECT * FROM `order`join `rental_order` on order.order_num = rental_order.order_num 
-join rental on rental_order.rental_sid= rental.rental_product_sid";
+join rental on rental_order.rental_sid= rental.sid";
 $product_order_retal = $pdo->query($sql3)->fetchAll();
 
 //活動
