@@ -1,7 +1,8 @@
 <?php
 require '../yeh/parts/admin-req.php';
 require '../yeh/parts/connect-db.php';
-$pageName = 'edit';
+$pageName = 'room_list';
+
 
 
 $sid = isset($_GET['room_sid']) ? intval($_GET['room_sid']) : 0;
@@ -176,7 +177,7 @@ $L_rows = $pdo->query($L_sql)->fetchAll();
             })
     })
     selMountain.addEventListener("mouseover", event => {
-
+        selMountain.options.length = 0;
         const district = selLocation.options[selLocation.selectedIndex].value;
         console.log(district)
         let fd = new FormData(document.form1)

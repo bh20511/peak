@@ -17,7 +17,7 @@ if (empty($r)) {
 ?>
 <?php require __DIR__ . '/parts/html-head.php'; ?>
 <?php require __DIR__ . '/parts/styles.php'; ?>
-<?php require __DIR__ . './parts/nav-m.php'; ?>
+<?php require __DIR__ . '/parts/nav-m.php'; ?>
 
 <div class="container">
     <div class="row mt-4">
